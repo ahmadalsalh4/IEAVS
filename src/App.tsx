@@ -1,24 +1,34 @@
 import { Route, Routes } from "react-router";
 import Layout from "./components/Layout";
 import NotFoundPage from "./components/NotFoundPage";
+import HomePage from "./features/public/home/HomePage";
+import RegisterPage from "./features/auth/register/RegisterPage";
+import LoginPage from "./features/auth/login/LoginPage";
+import SearchPage from "./features/public/search/SearchPage";
+import AdPage from "./features/public/ad/AdPage";
+import UserPage from "./features/public/user/UserPage";
+import MePage from "./features/protected/MePage";
+import EditMePage from "./features/protected/EditMePage";
+import PostAdPage from "./features/protected/PostAdPage";
+import EditAdPage from "./features/protected/EditAdPage";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" Component={Layout}>
-        <Route index />
-        <Route path="search/:name" />
-        <Route path="ad/:id" />
-        <Route path="user/:id" />
+        <Route index Component={HomePage} />
+        <Route path="search/:name" Component={SearchPage} />
+        <Route path="ad/:id" Component={AdPage} />
+        <Route path="user/:id" Component={UserPage} />
         <Route path="me">
-          <Route index />
-          <Route path="edit" />
-          <Route path="post-ad" />
-          <Route path="edit-ad/:id" />
+          <Route index Component={MePage} />
+          <Route path="edit" Component={EditMePage} />
+          <Route path="post-ad" Component={PostAdPage} />
+          <Route path="edit-ad/:id" Component={EditAdPage} />
         </Route>
       </Route>
-      <Route path="login" />
-      <Route path="register" />
+      <Route path="login" Component={LoginPage} />
+      <Route path="register" Component={RegisterPage} />
       <Route path="*" Component={NotFoundPage} />
     </Routes>
   );
