@@ -22,7 +22,6 @@ export default function LoginPage() {
         onSubmit={async (e) => {
           e.preventDefault();
           const response = await Login(cdata);
-          console.log(response);
           if (response.data) {
             dispatch(setToken(response.data.token));
             navogate("/");
