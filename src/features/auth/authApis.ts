@@ -1,20 +1,32 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseURL } from "../../utils/apis";
-import { type Auth, type LoginSchema } from "./types";
+import { baseURL, loginApi, registerApi } from "../../utils/apis";
+import type {
+  LoginApiSchema,
+  RegisterApiSchema,
+  LoginResponseSchema,
+  RegisterResponseSchema,
+} from "./types";
 
 export const authApis = createApi({
   reducerPath: "authApis",
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: (build) => ({
-    logIn: build.mutation<Pick<Auth, "token">, LoginSchema>({
-      query: ({ email, password }) => ({
-        url: "authenticat/login",
+    logIn: build.mutation<LoginResponseSchema, LoginApiSchema>({
+      query: (body) => ({
+        url: loginApi,
         method: "POST",
-        body: { email, password },
+        body: body,
+      }),
+    }),
+    register: build.mutation<RegisterResponseSchema, RegisterApiSchema>({
+      query: (body) => ({
+        url: registerApi,
+        method: "POST",
+        body: body,
       }),
     }),
   }),
 });
 
-export const { useLogInMutation } = authApis;
+export const { useLogInMutation, useRegisterMutation } = authApis;

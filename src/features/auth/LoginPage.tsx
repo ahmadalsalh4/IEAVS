@@ -1,19 +1,16 @@
 import { useNavigate } from "react-router";
-import { type LoginSchema } from "../types";
+import { type LoginApiSchema } from "./types";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { type AppDispath } from "../../../store";
-import { setToken } from "../authSlice";
-import { useLogInMutation } from "../authApis";
+import { useLogInMutation } from "./authApis";
+import { SetToken } from "../../utils/util";
 
 export default function LoginPage() {
-  const dispatch = useDispatch<AppDispath>();
   const [Login] = useLogInMutation();
-  const [cdata, setData] = useState<LoginSchema>({
+  const [data, setData] = useState<LoginApiSchema>({
     email: "",
     password: "",
   });
-  const navogate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -21,10 +18,10 @@ export default function LoginPage() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          const response = await Login(cdata);
+          const response = await Login(data);
           if (response.data) {
-            dispatch(setToken(response.data.token));
-            navogate("/");
+            SetToken(response.data.token);
+            navigate("/");
           } else if (response.error) {
             console.log(response.error);
           }
@@ -32,20 +29,20 @@ export default function LoginPage() {
       >
         <label htmlFor="Email">Email: </label>
         <input
-          type="text"
+          type="email"
           id="Email"
-          value={cdata.email}
+          value={data.email}
           onChange={(e) => {
-            setData({ ...cdata, email: e.target.value });
+            setData({ ...data, email: e.target.value });
           }}
         />
         <label htmlFor="Password">Password: </label>
         <input
-          type="text"
+          type="password"
           id="Password"
-          value={cdata.password}
+          value={data.password}
           onChange={(e) => {
-            setData({ ...cdata, password: e.target.value });
+            setData({ ...data, password: e.target.value });
           }}
         />
         <button type="submit">Login</button>

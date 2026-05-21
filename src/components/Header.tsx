@@ -1,22 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
-import type { AppDispath, RootState } from "../store";
-import { logOut } from "../features/auth/authSlice";
+import { Link, useNavigate } from "react-router";
+import { GetToken, ResetToken } from "../utils/util";
 
 export default function Header() {
-  const token = useSelector((state: RootState) => state.auth.token);
-  const dispatch = useDispatch<AppDispath>();
+  const token = GetToken();
+  const navigate = useNavigate();
   return (
     <div>
       <Link to="/">IEAVS</Link>{" "}
       {token ? (
-        <button
-          onClick={() => {
-            dispatch(logOut());
-          }}
-        >
-          logout
-        </button>
+        <div>
+          <h3>welcome back {token}</h3>
+          <button
+            onClick={() => {
+              ResetToken();
+              navigate("/");
+            }}
+          >
+            logout
+          </button>
+        </div>
       ) : (
         <div>
           <Link to="/login">Login</Link>
