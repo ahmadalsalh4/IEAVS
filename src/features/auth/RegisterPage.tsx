@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRegisterMutation } from "./authApis";
+import { useRegisterMutation } from "./authApi";
 import { type RegisterApiSchema } from "./types";
 import { useNavigate } from "react-router";
 import { SetToken } from "../../utils/util";

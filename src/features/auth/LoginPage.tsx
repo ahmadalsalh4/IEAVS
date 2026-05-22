@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { type LoginApiSchema } from "./types";
 import { useState } from "react";
-import { useLogInMutation } from "./authApis";
+import { useLogInMutation } from "./authApi";
 import { SetToken } from "../../utils/util";
 
 export default function LoginPage() {

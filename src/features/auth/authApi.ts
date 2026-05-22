@@ -8,8 +8,8 @@ import type {
   RegisterResponseSchema,
 } from "./types";
 
-export const authApis = createApi({
-  reducerPath: "authApis",
+export const authApi = createApi({
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: (build) => ({
     logIn: build.mutation<LoginResponseSchema, LoginApiSchema>({
@@ -29,4 +29,4 @@ export const authApis = createApi({
   }),
 });
 
-export const { useLogInMutation, useRegisterMutation } = authApis;
+export const { useLogInMutation, useRegisterMutation } = authApi;
