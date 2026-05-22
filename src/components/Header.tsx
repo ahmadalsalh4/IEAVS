@@ -1,36 +1,48 @@
 import { Link, useNavigate } from "react-router";
 import { GetToken, ResetToken } from "../utils/util";
 import { useGetMeQuery } from "../features/protected/userApi";
+import { useEffect } from "react";
 
 export default function Header() {
   const token = GetToken();
-  console.log("re rendered");
+  const navigate = useNavigate();
+  const { data, isSuccess, isError, error, isLoading } = useGetMeQuery(
+    undefined,
+    {
+      skip: !token,
+    },
+  );
+  useEffect(() => {
+    if (isError && error.data.error === "invalid token") {
+      ResetToken();
+      window.location.reload();
+    }
+  }, [isError, error, navigate]);
 
-  const { data, isSuccess } = useGetMeQuery(undefined, {
-    skip: !token,
-  });
-const navigate = useNavigate();
-  // if (isError) {
-  //   console.log(error);
-  //   ResetToken();
-  //   navigate("/");
-  // }
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
 
-  
   return (
     <div>
-      {token}
-      <Link to="/">IEAVS</Link>{" "}
-      {token && isSuccess ? (
+      <Link
+        to="/"
+        onClick={() => {
+          if (location.pathname === "/") {
+            window.location.reload();
+          }
+        }}
+      >
+        IEAVS
+      </Link>
+      {isSuccess ? (
         <div>
-          <h3>
-            welcome back {data.email} ,, {token}
-          </h3>
-
+          <h3>welcome back</h3>
+          <button> my profile {data.email}</button>
           <button
             onClick={() => {
               ResetToken();
-              navigate("/");
+              window.location.reload();
             }}
           >
             logout
