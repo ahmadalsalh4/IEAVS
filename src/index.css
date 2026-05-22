@@ -1,1 +1,11 @@
-/* @import "tailwindcss"; */
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2563eb;
+}
+
+@layer base {
+  input {
+    @apply border border-primary p-1 rounded-xl;
+  }
+}

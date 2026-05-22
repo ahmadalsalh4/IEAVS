@@ -38,7 +38,8 @@ export default function Header() {
       {isSuccess ? (
         <div>
           <h3>welcome back</h3>
-          <button> my profile {data.email}</button>
+          <Link to="/me">my profile {data.email}</Link>
+
           <button
             onClick={() => {
               ResetToken();

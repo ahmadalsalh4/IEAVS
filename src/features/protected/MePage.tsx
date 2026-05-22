@@ -1,3 +1,8 @@
 export default function MePage() {
-  return <div>MePage</div>;
+  return (
+    <div>
+      <h1>MePage</h1>
+      
+    </div>
+  );
 }
