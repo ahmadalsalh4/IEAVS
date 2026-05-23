@@ -14,22 +14,24 @@ import EditAdPage from "./features/protected/EditAdPage";
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" Component={Layout}>
-        <Route index Component={HomePage} />
-        <Route path="search/:name" Component={SearchPage} />
-        <Route path="ad/:id" Component={AdPage} />
-        <Route path="user/:id" Component={UserPage} />
-        <Route path="me">
-          <Route index Component={MePage} />
-          <Route path="edit" Component={EditMePage} />
-          <Route path="post-ad" Component={PostAdPage} />
-          <Route path="edit-ad/:id" Component={EditAdPage} />
+    <div className="myApp">
+      <Routes>
+        <Route path="/" Component={Layout}>
+          <Route index Component={HomePage} />
+          <Route path="search/:name" Component={SearchPage} />
+          <Route path="ad/:id" Component={AdPage} />
+          <Route path="user/:id" Component={UserPage} />
+          <Route path="me">
+            <Route index Component={MePage} />
+            <Route path="edit" Component={EditMePage} />
+            <Route path="post-ad" Component={PostAdPage} />
+            <Route path="edit-ad/:id" Component={EditAdPage} />
+          </Route>
         </Route>
-      </Route>
-      <Route path="login" Component={LoginPage} />
-      <Route path="register" Component={RegisterPage} />
-      <Route path="*" Component={NotFoundPage} />
-    </Routes>
+        <Route path="login" Component={LoginPage} />
+        <Route path="register" Component={RegisterPage} />
+        <Route path="*" Component={NotFoundPage} />
+      </Routes>
+    </div>
   );
 }

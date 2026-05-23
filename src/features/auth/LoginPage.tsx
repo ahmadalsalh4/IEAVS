@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { type LoginApiSchema } from "./types";
 import { useState } from "react";
 import { useLogInMutation } from "./authApi";
@@ -13,9 +13,9 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-center items-center h-screen bg-blue-600 ">
-      <div className="bg-white w-2/3 mb-50 h-fit rounded-2xl p-3 flex flex-col">
-        <div className="text-xl text-center">Login Page</div>
+    <div className="myContainer">
+      <div className="w-2/3 mb-50 rounded-3xl p-3 bg-surface ">
+        <h1 className="myHead ">Login Page</h1>
         <form
           className="flex flex-col"
           onSubmit={async (e) => {
@@ -47,14 +47,14 @@ export default function LoginPage() {
               setData({ ...data, password: e.target.value });
             }}
           />
-          <div className="flex justify-center">
-            <button
-              className="rounded-xl text-white bg-primary mt-3 p-2 w-fit "
-              type="submit"
-            >
-              Login
-            </button>
+          <div className="mt-3">
+            <p>
+              dont have account? <Link to={"/register"}>register now</Link>
+            </p>
           </div>
+          <button type="submit" className="mt-3">
+            Login
+          </button>
         </form>
       </div>
     </div>
