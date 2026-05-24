@@ -14,10 +14,9 @@ export default function LoginPage() {
 
   return (
     <div className="myContainer">
-      <div className="w-2/3 mb-50 rounded-3xl p-3 bg-surface ">
+      <div className="myFormCard">
         <h1 className="myHead ">Login Page</h1>
         <form
-          className="flex flex-col"
           onSubmit={async (e) => {
             e.preventDefault();
             const response = await Login(data);
@@ -47,11 +46,9 @@ export default function LoginPage() {
               setData({ ...data, password: e.target.value });
             }}
           />
-          <div className="mt-3">
-            <p>
-              dont have account? <Link to={"/register"}>register now</Link>
-            </p>
-          </div>
+          <p className="mt-3">
+            dont have account? <Link to={"/register"}>register now</Link>
+          </p>
           <button type="submit" className="mt-3">
             Login
           </button>

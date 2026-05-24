@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRegisterMutation } from "./authApi";
 import { type RegisterApiSchema } from "./types";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { SetToken } from "../../utils/util";
 
 export default function RegisterPage() {
@@ -16,24 +16,24 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>RegisterPage</h1>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const response = await register(data);
-          if (response.data) {
-            SetToken(response.data.token);
-            navigate("/");
-          } else if (response.error) {
-            console.log(response.error);
-          }
-        }}
-      >
-        <div>
-          {" "}
+    <div className="myContainer">
+      <div className="myFormCard">
+        <h1 className="myHead">RegisterPage</h1>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const response = await register(data);
+            if (response.data) {
+              SetToken(response.data.token);
+              navigate("/");
+            } else if (response.error) {
+              console.log(response.error);
+            }
+          }}
+        >
           <label htmlFor="name">name: </label>
           <input
+            required
             id="name"
             type="text"
             value={data.name}
@@ -41,11 +41,10 @@ export default function RegisterPage() {
               setData({ ...data, name: e.target.value });
             }}
           />
-        </div>
-        <div>
-          {" "}
+
           <label htmlFor="surname">surname: </label>
           <input
+            required
             id="surname"
             type="text"
             value={data.surname}
@@ -53,11 +52,10 @@ export default function RegisterPage() {
               setData({ ...data, surname: e.target.value });
             }}
           />
-        </div>
 
-        <div>
           <label htmlFor="email">email: </label>
           <input
+            required
             id="email"
             type="email"
             value={data.email}
@@ -65,10 +63,10 @@ export default function RegisterPage() {
               setData({ ...data, email: e.target.value });
             }}
           />
-        </div>
-        <div>
+
           <label htmlFor="phone_number">phone number: </label>
           <input
+            required
             id="phone_number"
             type="number"
             value={data.phone_number}
@@ -76,10 +74,10 @@ export default function RegisterPage() {
               setData({ ...data, phone_number: e.target.value });
             }}
           />
-        </div>
-        <div>
+
           <label htmlFor="password">password: </label>
           <input
+            required
             id="password"
             type="password"
             value={data.password}
@@ -87,11 +85,17 @@ export default function RegisterPage() {
               setData({ ...data, password: e.target.value });
             }}
           />
-        </div>
-        <div>
-          <button type="submit">Register</button>
-        </div>
-      </form>
+
+          <p className="mt-3">
+            have account? <Link to={"/login"}>login now</Link>
+          </p>
+          <div>
+            <button className="mt-3" type="submit">
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

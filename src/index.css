@@ -9,20 +9,26 @@
 
 @layer base {
   input {
-    @apply bg-base border border-deep rounded-lg p-1;
+    @apply bg-base border rounded-lg p-1 focus:opacity-70;
   }
   button,
   a {
-    @apply bg-deep text-surface rounded-xl px-2 py-1;
+    @apply bg-deep text-surface rounded-xl px-2 py-1 hover:opacity-70;
+  }
+  form {
+    @apply flex flex-col;
   }
 }
 
 @layer components {
   .myApp {
-    @apply bg-base text-primary font-serif;
+    @apply bg-base text-primary font-serif ;
   }
   .myContainer {
-    @apply flex justify-center items-center h-screen;
+    @apply flex flex-col justify-center items-center h-screen;
+  }
+  .myFormCard {
+    @apply w-2/3 rounded-3xl p-3 bg-surface;
   }
   .myHead {
     @apply text-xl text-center text-deep;
