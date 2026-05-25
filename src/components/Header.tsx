@@ -24,7 +24,7 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-between items-center p-1 bg-surface h-full">
+    <div className="flex justify-between p-1 bg-surface h-full">
       <Link
         to="/"
         onClick={() => {
@@ -32,22 +32,27 @@ export default function Header() {
             window.location.reload();
           }
         }}
-        className=""
       >
         IEAVS
       </Link>
       {isSuccess ? (
-        <div>
+        <div className="flex items-center">
           <button
             onClick={() => {
               ResetToken();
               window.location.reload();
             }}
-            className="mx-2"
+            
           >
             logout
           </button>
-          <Link to="/me">my profile</Link>
+          <Link to="/me" className="bg-transparent inline-block">
+            <img
+              className="w-8  h-8 object-cover rounded-full "
+              src={data.profile_image_path}
+              alt=""
+            />
+          </Link>
         </div>
       ) : (
         <div>
