@@ -13,7 +13,7 @@ export default function Header() {
     },
   );
   useEffect(() => {
-    if (isError && error.data.error === "invalid token") {
+    if (isError && error.data.error === "jwt expired") {
       ResetToken();
       window.location.reload();
     }
@@ -42,7 +42,6 @@ export default function Header() {
               ResetToken();
               window.location.reload();
             }}
-            
           >
             logout
           </button>

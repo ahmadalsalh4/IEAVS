@@ -23,7 +23,7 @@ export default function HomePage() {
 
       <div>
         {isSuccess ? (
-          <div>
+          <div className="flex  flex-wrap">
             {data?.rows.map((ad: Ad) => {
               return <AdCard key={ad.id} ad={ad}></AdCard>;
             })}

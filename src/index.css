@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-base: #222831;
-  --color-surface: #393e46;
-  --color-deep: #00adb5;
-  --color-primary: #eeeeee;
+  --color-base: #f8f8f8;
+  --color-surface: #eee;
+  --color-deep: rgb(28, 51, 201);
+  --color-primary: #000000;
 }
+
 
 @layer base {
   input {
-    @apply bg-base border rounded-lg p-1 focus:opacity-70;
+    @apply bg-base border border-zinc-500 rounded-lg p-1 focus:opacity-70;
   }
   button,
   a {
@@ -22,7 +23,7 @@
 
 @layer components {
   .myApp {
-    @apply bg-base text-primary font-serif ;
+    @apply bg-base text-primary font-serif;
   }
   .myContainer {
     @apply flex flex-col justify-center items-center h-screen;
