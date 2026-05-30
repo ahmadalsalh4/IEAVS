@@ -54,6 +54,9 @@ export default function AdPage() {
             <Link
               to={`/user/${ad.user_id}`}
               className="bg-surface h-15 flex items-center gap-3 p-3 rounded-2xl text-inherit hover:opacity-95"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
             >
               <img
                 src={user?.userdata.profile_image_path}
