@@ -4,7 +4,6 @@ import { useGetMeQuery } from "../features/protected/userApi";
 import { useEffect } from "react";
 
 export default function Header() {
-  console.log("rendered");
   const token = GetToken();
   const navigate = useNavigate();
   const { data, isSuccess, isError, error, isLoading, refetch } = useGetMeQuery(
@@ -25,7 +24,7 @@ export default function Header() {
       ResetToken();
       window.location.reload();
     }
-  }, [isError, error, navigate, refetch]);
+  }, [isError, error, navigate, refetch, token]);
 
   if (isLoading) {
     return <div>loading...</div>;

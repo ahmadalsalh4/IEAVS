@@ -11,7 +11,7 @@ import MePage from "./features/protected/pages/MePage";
 import EditMePage from "./features/protected/pages/EditMePage";
 import PostAdPage from "./features/protected/pages/PostAdPage";
 import EditAdPage from "./features/protected/pages/EditAdPage";
-import PageGateWay from "./features/protected/pages/PageGateWay";
+import PageGateWay from "./components/PageGateWay";
 
 export default function App() {
   return (
