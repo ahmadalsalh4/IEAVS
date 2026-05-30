@@ -27,10 +27,10 @@ export default function App() {
             <Route path="post-ad" Component={PostAdPage} />
             <Route path="edit-ad/:id" Component={EditAdPage} />
           </Route>
+          <Route path="*" Component={NotFoundPage} />
         </Route>
         <Route path="login" Component={LoginPage} />
         <Route path="register" Component={RegisterPage} />
-        <Route path="*" Component={NotFoundPage} />
       </Routes>
     </div>
   );
