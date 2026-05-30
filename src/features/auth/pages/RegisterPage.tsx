@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useRegisterMutation } from "./authApi";
-import { type RegisterApiSchema } from "./types";
+import { useRegisterMutation } from "../authApi";
+import { type RegisterApiSchema } from "../types";
 import { useNavigate, Link } from "react-router";
-import { SetToken } from "../../utils/util";
+import { SetToken } from "../../../utils/util";
 
 export default function RegisterPage() {
   const [register] = useRegisterMutation();

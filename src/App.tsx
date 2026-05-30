@@ -1,16 +1,16 @@
 import { Route, Routes } from "react-router";
 import Layout from "./components/Layout";
 import NotFoundPage from "./components/NotFoundPage";
-import HomePage from "./features/public/home/HomePage";
-import RegisterPage from "./features/auth/RegisterPage";
-import LoginPage from "./features/auth/LoginPage";
-import SearchPage from "./features/public/search/SearchPage";
-import AdPage from "./features/public/ad/AdPage";
-import UserPage from "./features/public/user/UserPage";
-import MePage from "./features/protected/MePage";
-import EditMePage from "./features/protected/EditMePage";
-import PostAdPage from "./features/protected/PostAdPage";
-import EditAdPage from "./features/protected/EditAdPage";
+import HomePage from "./features/public/pages/HomePage";
+import RegisterPage from "./features/auth/pages/RegisterPage";
+import LoginPage from "./features/auth/pages/LoginPage";
+import SearchPage from "./features/public/pages/SearchPage";
+import AdPage from "./features/public/pages/AdPage";
+import UserPage from "./features/public/pages/UserPage";
+import MePage from "./features/protected/pages/MePage";
+import EditMePage from "./features/protected/pages/EditMePage";
+import PostAdPage from "./features/protected/pages/PostAdPage";
+import EditAdPage from "./features/protected/pages/EditAdPage";
 
 export default function App() {
   return (
