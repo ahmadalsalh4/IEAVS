@@ -11,6 +11,7 @@ import MePage from "./features/protected/pages/MePage";
 import EditMePage from "./features/protected/pages/EditMePage";
 import PostAdPage from "./features/protected/pages/PostAdPage";
 import EditAdPage from "./features/protected/pages/EditAdPage";
+import PageGateWay from "./features/protected/pages/PageGateWay";
 
 export default function App() {
   return (
@@ -21,7 +22,7 @@ export default function App() {
           <Route path="search/:name" Component={SearchPage} />
           <Route path="ad/:id" Component={AdPage} />
           <Route path="user/:id" Component={UserPage} />
-          <Route path="me">
+          <Route path="me" Component={PageGateWay}>
             <Route index Component={MePage} />
             <Route path="edit" Component={EditMePage} />
             <Route path="post-ad" Component={PostAdPage} />

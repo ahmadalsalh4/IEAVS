@@ -4,20 +4,28 @@ import { useGetMeQuery } from "../features/protected/userApi";
 import { useEffect } from "react";
 
 export default function Header() {
+  console.log("rendered");
   const token = GetToken();
   const navigate = useNavigate();
-  const { data, isSuccess, isError, error, isLoading } = useGetMeQuery(
+  const { data, isSuccess, isError, error, isLoading, refetch } = useGetMeQuery(
     undefined,
     {
       skip: !token,
     },
   );
   useEffect(() => {
-    if (isError && error.data.error === "jwt expired") {
+    if (token) {
+      refetch();
+    }
+    if (
+      isError &&
+      (error.data.error === "jwt expired" ||
+        error.data.error === "invalid token")
+    ) {
       ResetToken();
       window.location.reload();
     }
-  }, [isError, error, navigate]);
+  }, [isError, error, navigate, refetch]);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -40,6 +48,7 @@ export default function Header() {
           <button
             onClick={() => {
               ResetToken();
+              navigate("/");
               window.location.reload();
             }}
           >
