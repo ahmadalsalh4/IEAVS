@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useGetAdsQuery } from "../adsApi";
-import AdCard from "./AdCard";
+import AdCard from "../../../components/AdCard";
 import type { Ad } from "../types";
 export default function HomePage() {
   const { data, isSuccess } = useGetAdsQuery();
@@ -25,7 +25,7 @@ export default function HomePage() {
         {isSuccess ? (
           <div className="flex  flex-wrap">
             {data?.rows.map((ad: Ad) => {
-              return <AdCard key={ad.id} ad={ad}></AdCard>;
+              return <AdCard key={ad.id} ad={ad} />;
             })}
           </div>
         ) : (

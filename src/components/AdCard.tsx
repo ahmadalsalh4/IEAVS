@@ -1,9 +1,13 @@
-import type { Ad } from "../types";
+import { Link } from "react-router";
+import type { Ad } from "../features/public/types";
 import { MapPin, Calendar } from "lucide-react";
 
 export default function AdCard({ ad }: { ad: Ad }) {
   return (
-    <div className="bg-surface w-40 h-77 m-auto my-3 rounded-2xl">
+    <Link
+      className="text-inherit bg-surface w-40 h-77 m-auto my-3 p-0 hover:opacity-95"
+      to={`ad/${ad.id}`}
+    >
       <img
         className=" w-full h-50 object-cover rounded-2xl bg-amber-50 "
         src={ad.image_path}
@@ -17,6 +21,6 @@ export default function AdCard({ ad }: { ad: Ad }) {
         <Calendar size={20} className="inline-block" />
         <p className="inline-block"> {ad.date.slice(0, 10)}</p>
       </div>
-    </div>
+    </Link>
   );
 }
