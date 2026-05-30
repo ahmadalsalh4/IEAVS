@@ -30,9 +30,6 @@ export default function AdPage() {
   if (ad_lod || user_lod || suggestedAds_lod) {
     return <div>loding...</div>;
   }
-  if (suggestedAds_suc) {
-    console.log(suggestedAds);
-  }
 
   return (
     <>

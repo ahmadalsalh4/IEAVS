@@ -23,6 +23,9 @@ export const adsApi = createApi({
     getAdsByUser: build.query<AdsByUserApiResponseSchema, number>({
       query: (userId) => getAdsApi + "/user/" + userId,
     }),
+    getAdBySearch: build.query<AdsApiResponseSchema, string>({
+      query: (searchWord) => getAdsApi + `/?search=${searchWord}`,
+    }),
   }),
 });
 
@@ -31,4 +34,5 @@ export const {
   useGetAdsByCatagoryQuery,
   useGetAdQuery,
   useGetAdsByUserQuery,
+  useGetAdBySearchQuery,
 } = adsApi;

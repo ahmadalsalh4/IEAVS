@@ -1,0 +1,27 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+export default function SearchBar({ init }: { init: string }) {
+  const [search, setSearch] = useState(init);
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && search !== "") navigate(`/search/${search}`);
+        }}
+      />
+      <Link
+        to={`/search/${search}`}
+        className={search ? "" : "pointer-events-none"}
+      >
+        ara
+      </Link>
+    </>
+  );
+}
