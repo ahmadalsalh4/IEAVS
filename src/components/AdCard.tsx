@@ -6,7 +6,10 @@ export default function AdCard({ ad }: { ad: Ad }) {
   return (
     <Link
       className="text-inherit bg-surface w-40 h-77 m-auto my-3 p-0 hover:opacity-95"
-      to={`ad/${ad.id}`}
+      to={`/ad/${ad.id}`}
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
     >
       <img
         className=" w-full h-50 object-cover rounded-2xl bg-amber-50 "
