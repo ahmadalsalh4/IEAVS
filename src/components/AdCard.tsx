@@ -12,7 +12,7 @@ export default function AdCard({ ad }: { ad: Ad }) {
       }}
     >
       <img
-        className=" w-full h-50 object-cover rounded-2xl bg-amber-50 "
+        className=" w-full h-50 object-cover rounded-2xl"
         src={ad.image_path}
         alt=""
       />

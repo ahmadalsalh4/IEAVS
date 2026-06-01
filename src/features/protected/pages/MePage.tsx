@@ -32,7 +32,6 @@ export default function MePage() {
     navigate("/");
     window.location.reload();
   }
-  console.log(data_MyAds);
   if (isLoading_Me || isLoading_MyAds) {
     return <div>loading...</div>;
   }
@@ -52,9 +51,12 @@ export default function MePage() {
               </div>
               <div className="text-lg">{data_Me.email}</div>
               <div className="text-lg">{data_Me.phone_number}</div>
-              <div className="flex flex-col gap-3 text-lg bg-amber-50">
+              <div className="flex flex-col gap-3 text-lg">
                 <Link to={"edit"}>edit my account</Link>
                 <button onClick={handleDeleteAcc}>delete my account</button>
+                <Link to={"post-ad"} className="">
+                  add new Ad{" "}
+                </Link>
               </div>
             </div>
           </div>
