@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import { MapPin, Calendar } from "lucide-react";
 import type { MyAd } from "../features/protected/types";
+import { useDeleteAdMutation } from "../features/protected/userApi";
 
 export default function MyAdCard({ ad }: { ad: MyAd }) {
+  const [deleteAd] = useDeleteAdMutation();
   return (
     <div className="bg-surface w-40 h-92 m-auto my-3 p-0 hover:opacity-95">
       <Link
@@ -42,6 +44,15 @@ export default function MyAdCard({ ad }: { ad: MyAd }) {
       <Link to={`edit-ad/${ad.id}`} className="ml-1.5">
         Edit AD
       </Link>
+      <button
+        className="bg-red-800 py-0.5 px-0.5 ml-1"
+        onClick={() => {
+          deleteAd(ad.id);
+          window.location.reload();
+        }}
+      >
+        Delete ad
+      </button>
     </div>
   );
 }
