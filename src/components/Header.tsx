@@ -16,11 +16,7 @@ export default function Header() {
     if (token) {
       refetch();
     }
-    if (
-      isError &&
-      (error.data.error === "jwt expired" ||
-        error.data.error === "invalid token")
-    ) {
+    if (isError) {
       ResetToken();
       window.location.reload();
     }

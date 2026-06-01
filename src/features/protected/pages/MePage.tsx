@@ -1,43 +1,68 @@
-import { GetToken } from "../../../utils/util";
-import { useGetMeQuery } from "../userApi";
-import { Link } from "react-router";
+import MyAdCard from "../../../components/MyAdCard";
+import { GetToken, ResetToken } from "../../../utils/util";
+import {
+  useDeleteMeMutation,
+  useGetMeQuery,
+  useGetMyAdsQuery,
+} from "../userApi";
+import { Link, useNavigate } from "react-router";
 
 export default function MePage() {
   const token = GetToken();
+  const navigate = useNavigate();
 
-  const { data, isSuccess, isLoading } = useGetMeQuery(undefined, {
+  const {
+    data: data_Me,
+    isSuccess: isSuccess_Me,
+    isLoading: isLoading_Me,
+  } = useGetMeQuery(undefined, {
     skip: !token,
   });
-  if (isLoading) {
+  const {
+    data: data_MyAds,
+    isSuccess: isSuccess_MyAds,
+    isLoading: isLoading_MyAds,
+  } = useGetMyAdsQuery(undefined, {
+    skip: !token,
+  });
+  const [deleteMe] = useDeleteMeMutation();
+  function handleDeleteAcc() {
+    deleteMe();
+    ResetToken();
+    navigate("/");
+    window.location.reload();
+  }
+  console.log(data_MyAds);
+  if (isLoading_Me || isLoading_MyAds) {
     return <div>loading...</div>;
   }
   return (
     <>
-      {isSuccess && (
+      {isSuccess_Me && isSuccess_MyAds && (
         <div>
           <div className="flex flex-row bg-surface p-2">
             <img
-              src={data.profile_image_path}
+              src={data_Me.profile_image_path}
               alt=""
               className="w-1/2 h-50 object-cover rounded-4xl"
             />
             <div className="flex flex-col m-auto text-2xl ">
               <div>
-                {data.name} {data.surname}
+                {data_Me.name} {data_Me.surname}
               </div>
-              <div className="text-lg">{data.email}</div>
-              <div className="text-lg">{data.phone_number}</div>
+              <div className="text-lg">{data_Me.email}</div>
+              <div className="text-lg">{data_Me.phone_number}</div>
               <div className="flex flex-col gap-3 text-lg bg-amber-50">
                 <Link to={"edit"}>edit my account</Link>
-                <button>delete my account</button>
+                <button onClick={handleDeleteAcc}>delete my account</button>
               </div>
             </div>
           </div>
-          {/* <div className="flex flex-wrap">
-            {data.rows.map((ad) => {
-              return <AdCard key={ad.id} ad={ad}></AdCard>;
+          <div className="flex flex-wrap">
+            {data_MyAds.rows.map((ad) => {
+              return <MyAdCard key={ad.id} ad={ad}></MyAdCard>;
             })}
-          </div> */}
+          </div>
         </div>
       )}
     </>

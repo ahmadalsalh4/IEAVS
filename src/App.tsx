@@ -12,6 +12,7 @@ import EditMePage from "./features/protected/pages/EditMePage";
 import PostAdPage from "./features/protected/pages/PostAdPage";
 import EditAdPage from "./features/protected/pages/EditAdPage";
 import PageGateWay from "./components/PageGateWay";
+import MyAdPage from "./features/protected/pages/MyAdPage";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="me" Component={PageGateWay}>
             <Route index Component={MePage} />
             <Route path="edit" Component={EditMePage} />
+            <Route path="ads/:id" Component={MyAdPage} />
             <Route path="post-ad" Component={PostAdPage} />
             <Route path="edit-ad/:id" Component={EditAdPage} />
           </Route>
