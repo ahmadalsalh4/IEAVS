@@ -1,3 +1,5 @@
+import type { RegisterApiSchema } from "../auth/types";
+
 export type User = {
   id: number;
   name: string;
@@ -34,4 +36,9 @@ export type PostAdResponseSchema = {
   id: number;
   title: string;
   price: string;
+};
+
+export type PatchUserSchema = Partial<Omit<RegisterApiSchema, "email">>;
+export type PatchUserResSchema = Omit<RegisterApiSchema, "password"> & {
+  id: number;
 };

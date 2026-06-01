@@ -53,7 +53,7 @@ export default function MePage() {
               <div className="text-lg">{data_Me.phone_number}</div>
               <div className="flex flex-col gap-3 text-lg">
                 <Link to={"edit"}>edit my account</Link>
-                <button onClick={handleDeleteAcc}>delete my account</button>
+                <button disabled onClick={handleDeleteAcc}>delete my account</button>
                 <Link to={"post-ad"} className="">
                   add new Ad{" "}
                 </Link>
