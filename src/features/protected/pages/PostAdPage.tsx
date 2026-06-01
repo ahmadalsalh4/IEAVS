@@ -1,85 +1,86 @@
-import { useNavigate, Link } from "react-router";
-
+import { useNavigate } from "react-router";
 import { useState } from "react";
-
-import { SetToken } from "../../../utils/util";
-import { useLogInMutation } from "../../auth/authApi";
-import type { LoginApiSchema } from "../../auth/types";
+import type { PostAdSchema } from "../types";
+import { usePostAdMutation } from "../userApi";
+import LoadCategories from "../../../components/LoadCategories";
+import LoadCities from "../../../components/LoadCities";
 
 export default function PostAdPage() {
-  const [Login] = useLogInMutation();
-  const [data, setData] = useState<LoginApiSchema>({
-    email: "",
-    password: "",
+  const [PostAd] = usePostAdMutation();
+  const [data, setData] = useState<PostAdSchema>({
+    title: "",
+    description: "",
+    price: "",
+    category_id: "",
+    city_id: "",
   });
   const navigate = useNavigate();
 
   return (
     <div className="myContainer">
       <div className="myFormCard">
-        <h1 className="myHead ">Add Post Page</h1>
+        <h1 className="myHead">Add Post Page</h1>
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            const response = await Login(data);
+            console.log(data);
+            const response = await PostAd(data);
             if (response.data) {
-              SetToken(response.data.token);
-              navigate("/");
+              navigate("/me");
             } else if (response.error) {
               console.log(response.error);
             }
           }}
         >
-          <label htmlFor="Email">Email: </label>
+          <label htmlFor="title">title: </label>
           <input
-            type="email"
-            id="Email"
-            value={data.email}
+            type="text"
+            id="title"
+            value={data.title}
             onChange={(e) => {
-              setData({ ...data, email: e.target.value });
+              setData({ ...data, title: e.target.value });
             }}
           />
-          <label htmlFor="Email">Email: </label>
+          <label htmlFor="price">price: </label>
           <input
-            type="email"
-            id="Email"
-            value={data.email}
+            type="text"
+            id="price"
+            value={data.price}
             onChange={(e) => {
-              setData({ ...data, email: e.target.value });
+              setData({ ...data, price: e.target.value });
             }}
           />
-          <label htmlFor="Email">Email: </label>
+          <label htmlFor="description">description: </label>
           <input
-            type="email"
-            id="Email"
-            value={data.email}
+            type="text"
+            id="description"
+            value={data.description}
             onChange={(e) => {
-              setData({ ...data, email: e.target.value });
+              setData({ ...data, description: e.target.value });
             }}
           />
-          <label htmlFor="Email">Email: </label>
-          <input
-            type="email"
-            id="Email"
-            value={data.email}
+
+          <select
+            id="category_id"
+            value={data.category_id}
             onChange={(e) => {
-              setData({ ...data, email: e.target.value });
+              setData({ ...data, category_id: e.target.value });
             }}
-          />
-          <label htmlFor="Password">Password: </label>
-          <input
-            type="password"
-            id="Password"
-            value={data.password}
+          >
+            <LoadCategories />
+          </select>
+          <select
+            id="city_id"
+            value={data.city_id}
             onChange={(e) => {
-              setData({ ...data, password: e.target.value });
+              setData({ ...data, city_id: e.target.value });
             }}
-          />
-          <p className="mt-3">
-            dont have account? <Link to={"/register"}>register now</Link>
-          </p>
+          >
+            <LoadCities />
+          </select>
+
           <button type="submit" className="mt-3">
-            Login
+            post ad
           </button>
         </form>
       </div>

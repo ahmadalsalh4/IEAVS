@@ -21,3 +21,17 @@ export type MyAdsApiResponseSchema = {
   rowCount: number;
   rows: [MyAd];
 };
+
+export type PostAdSchema = {
+  title: string;
+  description: string;
+  price: string;
+  category_id: string;
+  city_id: string;
+};
+
+export type PostAdResponseSchema = {
+  id: number;
+  title: string;
+  price: string;
+};

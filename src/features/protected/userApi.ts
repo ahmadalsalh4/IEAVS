@@ -1,7 +1,12 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseURL, getMeApi } from "../../utils/apis";
-import { type MyAdsApiResponseSchema, type User } from "./types";
+import {
+  type MyAdsApiResponseSchema,
+  type PostAdResponseSchema,
+  type PostAdSchema,
+  type User,
+} from "./types";
 import { GetToken } from "../../utils/util";
 import type { AdDetailed } from "../public/types";
 
@@ -32,6 +37,19 @@ export const userApi = createApi({
     getMyAd: build.query<AdDetailed, number>({
       query: (adId) => getMeApi + "/ads" + "/" + adId,
     }),
+    postAd: build.mutation<PostAdResponseSchema, PostAdSchema>({
+      query: (body) => ({
+        url: getMeApi + "/ads",
+        method: "Post",
+        body: body,
+      }),
+    }),
+    deleteAd: build.mutation<string, number>({
+      query: (adId) => ({
+        url: getMeApi + "/ads" + "/" + adId,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -40,4 +58,6 @@ export const {
   useGetMyAdsQuery,
   useDeleteMeMutation,
   useGetMyAdQuery,
+  usePostAdMutation,
+  useDeleteAdMutation,
 } = userApi;
