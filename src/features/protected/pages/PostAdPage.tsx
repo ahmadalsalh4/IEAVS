@@ -23,7 +23,6 @@ export default function PostAdPage() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            console.log(data);
             const response = await PostAd(data);
             if (response.data) {
               navigate("/me");

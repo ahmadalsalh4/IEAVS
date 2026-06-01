@@ -3,6 +3,8 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseURL, getMeApi } from "../../utils/apis";
 import {
   type MyAdsApiResponseSchema,
+  type PatchAdResSchema,
+  type PatchAdSchema,
   type PatchUserResSchema,
   type PatchUserSchema,
   type PostAdResponseSchema,
@@ -53,6 +55,15 @@ export const userApi = createApi({
         body: body,
       }),
     }),
+    patchAd: build.mutation<PatchAdResSchema, PatchAdSchema & { adId: number }>(
+      {
+        query: ({ adId, ...body }) => ({
+          url: getMeApi + "/ads" + "/" + adId,
+          method: "PATCH",
+          body: body,
+        }),
+      },
+    ),
     deleteAd: build.mutation<string, number>({
       query: (adId) => ({
         url: getMeApi + "/ads" + "/" + adId,
@@ -70,4 +81,5 @@ export const {
   usePostAdMutation,
   useDeleteAdMutation,
   usePatchMeMutation,
+  usePatchAdMutation,
 } = userApi;

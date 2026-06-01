@@ -6,21 +6,24 @@ import AdCard from "../../../components/AdCard";
 
 export default function SearchPage() {
   const Word = useParams();
-  const { data, isSuccess, isError, error } = useGetAdBySearchQuery(
-    Word.name || "",
-    {
-      skip: !Word,
-    },
-  );
-  if (isError && error.data.error === "No ads found matching your criteria") {
-    return <div className="text-2xl text-center">ilan bulunmadi</div>;
+  const { data, isSuccess, isError } = useGetAdBySearchQuery(Word.name || "", {
+    skip: !Word,
+  });
+  if (isError) {
+    return (
+      <>
+        <div className="mt-3 flex justify-center gap-2">
+          <SearchBar init={Word.name || ""}></SearchBar>
+        </div>
+        <div className="text-2xl text-center">ilan bulunmadi</div>
+      </>
+    );
   }
   return (
     <div>
       <div className="mt-3 flex justify-center gap-2">
         <SearchBar init={Word.name || ""}></SearchBar>
       </div>
-
       <div>
         {isSuccess ? (
           <>

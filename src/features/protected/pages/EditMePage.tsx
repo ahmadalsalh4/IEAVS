@@ -16,9 +16,9 @@ export default function EditMePage() {
   });
   const [PatchUser] = usePatchMeMutation();
   const [data, setData] = useState<PatchUserSchema>({
-    name: data_Me?.name,
-    surname: data_Me?.surname,
-    phone_number: data_Me?.phone_number,
+    name: data_Me?.name ?? "",
+    surname: data_Me?.surname ?? "",
+    phone_number: data_Me?.phone_number ?? "",
     password: "",
   });
   const navigate = useNavigate();

@@ -42,3 +42,15 @@ export type PatchUserSchema = Partial<Omit<RegisterApiSchema, "email">>;
 export type PatchUserResSchema = Omit<RegisterApiSchema, "password"> & {
   id: number;
 };
+
+export type PatchAdSchema = Partial<
+  PostAdSchema & {
+    state_id: string;
+  }
+>;
+export type PatchAdResSchema = PatchAdSchema & {
+  id: number;
+  date: string;
+  image_path: string;
+  user_id: number;
+};
