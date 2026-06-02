@@ -72,7 +72,11 @@ export default function AdPage() {
               <div className="flex flex-wrap">
                 {suggestedAds.rows.map((subAd) => {
                   return ad.id == subAd.id ? null : (
-                    <AdCard key={subAd.id} ad={subAd}></AdCard>
+                    <AdCard
+                      key={subAd.id}
+                      ad={subAd}
+                      isProtected={false}
+                    ></AdCard>
                   );
                 })}
               </div>

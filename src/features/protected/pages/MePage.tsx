@@ -1,5 +1,4 @@
 import Loading from "../../../components/Loading";
-import MyAdCard from "../../../components/MyAdCard";
 import { GetToken, ResetToken } from "../../../utils/util";
 import {
   useDeleteMeMutation,
@@ -7,6 +6,7 @@ import {
   useGetMyAdsQuery,
 } from "../userApi";
 import { Link, useNavigate } from "react-router";
+import AdCard from "../../../components/AdCard";
 
 export default function MePage() {
   const token = GetToken();
@@ -54,16 +54,18 @@ export default function MePage() {
               <div className="text-lg">{data_Me.phone_number}</div>
               <div className="flex flex-col gap-3 text-lg">
                 <Link to={"edit"}>edit my account</Link>
-                <button disabled onClick={handleDeleteAcc}>delete my account</button>
+                <button disabled onClick={handleDeleteAcc}>
+                  delete my account
+                </button>
                 <Link to={"post-ad"} className="">
                   add new Ad{" "}
                 </Link>
               </div>
             </div>
           </div>
-          <div  className="grid grid-cols-2 gap-3 p-3">
+          <div className="grid grid-cols-2 gap-3 p-3">
             {data_MyAds.rows.map((ad) => {
-              return <MyAdCard key={ad.id} ad={ad}></MyAdCard>;
+              return <AdCard key={ad.id} ad={ad} isProtected={true}></AdCard>;
             })}
           </div>
         </div>

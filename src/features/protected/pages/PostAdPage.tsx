@@ -2,8 +2,8 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import type { PostAdSchema } from "../types";
 import { usePostAdMutation } from "../userApi";
-import LoadCategories from "../../../components/LoadCategories";
-import LoadCities from "../../../components/LoadCities";
+import LoadCategories from "../../../utils/LoadCategories";
+import LoadCities from "../../../utils/LoadCities";
 
 export default function PostAdPage() {
   const [PostAd] = usePostAdMutation();

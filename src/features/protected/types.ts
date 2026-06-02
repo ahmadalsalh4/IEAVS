@@ -16,7 +16,7 @@ export type MyAd = {
   date: string;
   image_path: string;
   city_name: string;
-  state_name: string;
+  state_name?: string;
 };
 
 export type MyAdsApiResponseSchema = {
