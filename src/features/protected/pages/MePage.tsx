@@ -1,3 +1,4 @@
+import Loading from "../../../components/Loading";
 import MyAdCard from "../../../components/MyAdCard";
 import { GetToken, ResetToken } from "../../../utils/util";
 import {
@@ -33,7 +34,7 @@ export default function MePage() {
     window.location.reload();
   }
   if (isLoading_Me || isLoading_MyAds) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
   return (
     <>

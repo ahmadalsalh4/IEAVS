@@ -3,6 +3,7 @@ import SearchBar from "../../../components/SearchBar";
 import type { Ad } from "../types";
 import { useGetAdBySearchQuery } from "../adsApi";
 import AdCard from "../../../components/AdCard";
+import Loading from "../../../components/Loading";
 
 export default function SearchPage() {
   const Word = useParams();
@@ -37,7 +38,7 @@ export default function SearchPage() {
             </div>
           </>
         ) : (
-          <div>loading...</div>
+          <Loading />
         )}
       </div>
     </div>

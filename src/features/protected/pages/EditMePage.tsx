@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useGetMeQuery, usePatchMeMutation } from "../userApi";
 import type { PatchUserSchema } from "../types";
 import { GetToken } from "../../../utils/util";
+import Loading from "../../../components/Loading";
 
 export default function EditMePage() {
   const token = GetToken();
@@ -24,7 +25,7 @@ export default function EditMePage() {
   const navigate = useNavigate();
 
   if (isLoading_Me) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

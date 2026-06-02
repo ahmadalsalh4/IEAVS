@@ -5,7 +5,7 @@ export default function SearchBar({ init }: { init: string }) {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div>
       <input
         type="text"
         value={search}
@@ -18,10 +18,10 @@ export default function SearchBar({ init }: { init: string }) {
       />
       <Link
         to={`/search/${search}`}
-        className={search ? "" : "pointer-events-none"}
+        className={"ml-3 " + (search ? "" : "pointer-events-none")}
       >
         ara
       </Link>
-    </>
+    </div>
   );
 }

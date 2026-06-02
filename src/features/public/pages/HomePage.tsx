@@ -2,15 +2,16 @@ import { useGetAdsQuery } from "../adsApi";
 import AdCard from "../../../components/AdCard";
 import type { Ad } from "../types";
 import SearchBar from "../../../components/SearchBar";
+import Loading from "../../../components/Loading";
 
 export default function HomePage() {
   const { data, isSuccess } = useGetAdsQuery();
   return (
-    <div>
-      <div className="mt-3 flex justify-center gap-2">
+    <div className="">
+      <div className="flex justify-center items-center mt-3">
         <SearchBar init=""></SearchBar>
       </div>
-      <p className="text-center mt-3 text-2xl">Son Eklenen Ilanlar</p>
+      <p className="myHead mt-3">Son Eklenen Ilanlar</p>
       <div>
         {isSuccess ? (
           <div className="flex flex-wrap">
@@ -19,7 +20,7 @@ export default function HomePage() {
             })}
           </div>
         ) : (
-          <div>loading...</div>
+          <Loading />
         )}
       </div>
     </div>

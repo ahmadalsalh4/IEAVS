@@ -6,7 +6,7 @@ import { useDeleteAdMutation } from "../features/protected/userApi";
 export default function MyAdCard({ ad }: { ad: MyAd }) {
   const [deleteAd] = useDeleteAdMutation();
   return (
-    <div className="bg-surface w-40 h-92 m-auto my-3 p-0 hover:opacity-95">
+    <div className="bg-surface shadow-lg w-40 h-92 m-auto my-3 p-0 hover:opacity-95 rounded-2xl">
       <Link
         className="text-inherit p-0"
         to={`ads/${ad.id}`}

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { GetToken, ResetToken } from "../utils/util";
 import { useGetMeQuery } from "../features/protected/userApi";
 import { useEffect } from "react";
+import Loading from "./Loading";
 
 export default function Header() {
   const token = GetToken();
@@ -23,7 +24,7 @@ export default function Header() {
   }, [isError, error, navigate, refetch, token]);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   return (
