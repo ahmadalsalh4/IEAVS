@@ -61,7 +61,7 @@ export default function MePage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap">
+          <div  className="grid grid-cols-2 gap-3 p-3">
             {data_MyAds.rows.map((ad) => {
               return <MyAdCard key={ad.id} ad={ad}></MyAdCard>;
             })}
