@@ -24,16 +24,19 @@ export const userApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["me", "myAds"],
 
   endpoints: (build) => ({
     getMe: build.query<User, void>({
       query: () => getMeApi,
+      providesTags: ["me"],
     }),
     deleteMe: build.mutation<string, void>({
       query: () => ({
         url: getMeApi,
         method: "DELETE",
       }),
+      invalidatesTags: ["me"],
     }),
     patchMe: build.mutation<PatchUserResSchema, PatchUserSchema>({
       query: (body) => ({
@@ -41,12 +44,16 @@ export const userApi = createApi({
         method: "PATCH",
         body: body,
       }),
+      invalidatesTags: ["me"],
     }),
+
     getMyAds: build.query<MyAdsApiResponseSchema, void>({
       query: () => getMeApi + "/ads",
+      providesTags: ["myAds"],
     }),
     getMyAd: build.query<AdDetailed, number>({
       query: (adId) => getMeApi + "/ads" + "/" + adId,
+      providesTags: (_, __, adId) => [{ type: "myAds", id: adId }],
     }),
     postAd: build.mutation<PostAdResponseSchema, PostAdSchema>({
       query: (body) => ({
@@ -54,6 +61,7 @@ export const userApi = createApi({
         method: "Post",
         body: body,
       }),
+      invalidatesTags: ["myAds"],
     }),
     patchAd: build.mutation<PatchAdResSchema, PatchAdSchema & { adId: number }>(
       {
@@ -62,6 +70,7 @@ export const userApi = createApi({
           method: "PATCH",
           body: body,
         }),
+        invalidatesTags: (_, __, { adId }) => [{ type: "myAds", id: adId }],
       },
     ),
     deleteAd: build.mutation<string, number>({
@@ -69,6 +78,7 @@ export const userApi = createApi({
         url: getMeApi + "/ads" + "/" + adId,
         method: "DELETE",
       }),
+      invalidatesTags: ["myAds"],
     }),
   }),
 });

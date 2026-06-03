@@ -11,7 +11,6 @@
   input {
     @apply border rounded-xl p-1;
   }
-  
   form {
     @apply flex flex-col;
   }
@@ -22,7 +21,7 @@
     @apply bg-main text-primary font-serif text-sm md:text-base;
   }
   .myContainer {
-    @apply flex justify-center items-center h-screen;
+    @apply flex justify-center items-center min-h-[calc(100vh-120px)];
   }
   .myFormCard {
     @apply w-2/3 rounded-3xl p-3 bg-surface shadow-2xl;

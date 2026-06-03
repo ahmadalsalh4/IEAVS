@@ -3,29 +3,37 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import type { PatchAdSchema } from "../types";
 import { useGetMyAdQuery, usePatchAdMutation } from "../userApi";
+import Loading from "../../../components/Loading";
+import MyError from "../../../components/MyError";
 
 export default function EditAdPage() {
-  const navigate = useNavigate();
+  const adId = Number(useParams<{ id: string }>().id);
 
-  const adId = useParams();
+  const navigate = useNavigate();
 
   const [PatchAd] = usePatchAdMutation();
 
-  const {
-    data: ad_data,
-    isSuccess,
-    isLoading,
-  } = useGetMyAdQuery(Number(adId.id));
+  const { data: ad, isSuccess, isLoading } = useGetMyAdQuery(adId);
 
-  const [data, setData] = useState<PatchAdSchema>({
-    title: ad_data?.title ?? "",
-    description: ad_data?.description ?? "",
-    price: ad_data?.price ?? "",
-    state_id: "",
+  const [form, setForm] = useState<PatchAdSchema>({
+    title: "",
+    description: "",
+    price: "",
   });
+  const [fillForm, setFillForm] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  if (isSuccess && fillForm) {
+    setFillForm(false);
+    setForm({
+      title: ad.title,
+      description: ad.description,
+      price: ad.price,
+    });
+  }
 
   if (isLoading) {
-    return <div>loding...</div>;
+    return <Loading />;
   }
 
   return (
@@ -37,14 +45,14 @@ export default function EditAdPage() {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
-                const response = await PatchAd({
-                  ...data,
-                  adId: Number(adId.id),
+                const { data, error } = await PatchAd({
+                  ...form,
+                  adId: adId,
                 });
-                if (response.data) {
+                if (data) {
                   navigate("/me");
-                } else if (response.error) {
-                  console.log(response.error);
+                } else {
+                  setErrorMessage(error.data.error);
                 }
               }}
             >
@@ -52,29 +60,31 @@ export default function EditAdPage() {
               <input
                 type="text"
                 id="title"
-                value={data.title}
+                value={form.title}
                 onChange={(e) => {
-                  setData({ ...data, title: e.target.value });
+                  setForm({ ...form, title: e.target.value });
                 }}
               />
               <label htmlFor="price">price: </label>
               <input
                 type="number"
+                min={1}
                 id="price"
-                value={data.price}
+                value={form.price}
                 onChange={(e) => {
-                  setData({ ...data, price: e.target.value });
+                  setForm({ ...form, price: e.target.value });
                 }}
               />
               <label htmlFor="description">description: </label>
               <input
                 type="text"
                 id="description"
-                value={data.description}
+                value={form.description}
                 onChange={(e) => {
-                  setData({ ...data, description: e.target.value });
+                  setForm({ ...form, description: e.target.value });
                 }}
               />
+              <MyError errorMessage={errorMessage}></MyError>
               <button type="submit" className="mt-3">
                 update ad
               </button>

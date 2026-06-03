@@ -2,49 +2,56 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useGetMeQuery, usePatchMeMutation } from "../userApi";
 import type { PatchUserSchema } from "../types";
-import { GetToken } from "../../../utils/util";
 import Loading from "../../../components/Loading";
+import MyError from "../../../components/MyError";
 
 export default function EditMePage() {
-  const token = GetToken();
-
-  const {
-    data: data_Me,
-    isSuccess: isSuccess_Me,
-    isLoading: isLoading_Me,
-  } = useGetMeQuery(undefined, {
-    skip: !token,
-  });
-  const [PatchUser] = usePatchMeMutation();
-  const [data, setData] = useState<PatchUserSchema>({
-    name: data_Me?.name ?? "",
-    surname: data_Me?.surname ?? "",
-    phone_number: data_Me?.phone_number ?? "",
-    password: "",
-  });
   const navigate = useNavigate();
 
-  if (isLoading_Me) {
+  const [PatchUser] = usePatchMeMutation();
+
+  const { data: me, isSuccess, isLoading } = useGetMeQuery();
+
+  const [form, setForm] = useState<PatchUserSchema>({
+    name: "",
+    surname: "",
+    phone_number: "",
+    password: "",
+  });
+
+  const [fillForm, setFillForm] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  if (isSuccess && fillForm) {
+    setFillForm(false);
+    setForm({
+      name: me.name,
+      surname: me.surname,
+      phone_number: me.phone_number,
+      password: "",
+    });
+  }
+
+  if (isLoading) {
     return <Loading />;
   }
 
   return (
     <>
-      {isSuccess_Me && (
+      {isSuccess && (
         <div className="myContainer">
           <div className="myFormCard">
             <h1 className="myHead">Update Me Page</h1>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
-
-                const { password, ...rest } = data;
-                const submitData = password === "" ? rest : data;
-                const response = await PatchUser(submitData);
-                if (response.data) {
+                const { password, ...rest } = form;
+                const submitData = password === "" ? rest : form;
+                const { data, error } = await PatchUser(submitData);
+                if (data) {
                   navigate("/me");
-                } else if (response.error) {
-                  console.log(response.error);
+                } else {
+                  setErrorMessage(error.data.error);
                 }
               }}
             >
@@ -52,9 +59,9 @@ export default function EditMePage() {
               <input
                 id="name"
                 type="text"
-                value={data.name}
+                value={form.name}
                 onChange={(e) => {
-                  setData({ ...data, name: e.target.value });
+                  setForm({ ...form, name: e.target.value });
                 }}
               />
 
@@ -62,9 +69,9 @@ export default function EditMePage() {
               <input
                 id="surname"
                 type="text"
-                value={data.surname}
+                value={form.surname}
                 onChange={(e) => {
-                  setData({ ...data, surname: e.target.value });
+                  setForm({ ...form, surname: e.target.value });
                 }}
               />
 
@@ -72,9 +79,9 @@ export default function EditMePage() {
               <input
                 id="phone_number"
                 type="number"
-                value={data.phone_number}
+                value={form.phone_number}
                 onChange={(e) => {
-                  setData({ ...data, phone_number: e.target.value });
+                  setForm({ ...form, phone_number: e.target.value });
                 }}
               />
 
@@ -82,17 +89,16 @@ export default function EditMePage() {
               <input
                 id="password"
                 type="password"
-                value={data.password}
+                value={form.password}
                 onChange={(e) => {
-                  setData({ ...data, password: e.target.value });
+                  setForm({ ...form, password: e.target.value });
                 }}
               />
+              <MyError errorMessage={errorMessage}></MyError>
 
-              <div>
-                <button className="mt-3" type="submit">
-                  Update
-                </button>
-              </div>
+              <button className="mt-3 bg-amber-50" type="submit">
+                Update
+              </button>
             </form>
           </div>
         </div>
