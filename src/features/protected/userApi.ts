@@ -36,7 +36,6 @@ export const userApi = createApi({
         url: getMeApi,
         method: "DELETE",
       }),
-      invalidatesTags: ["me"],
     }),
     patchMe: build.mutation<PatchUserResSchema, PatchUserSchema>({
       query: (body) => ({
@@ -48,37 +47,40 @@ export const userApi = createApi({
     }),
     /*-----------------------------------------------*/
     getMyAds: build.query<MyAdsApiResponseSchema, void>({
-      query: () => getMeApi + "/ads",
-      providesTags: ["myAds"],
+      query: () => `${getMeApi}/ads`,
+      providesTags: [{ type: "myAds", id: "LIST" }],
     }),
     getMyAd: build.query<AdDetailed, number>({
-      query: (adId) => getMeApi + "/ads" + "/" + adId,
+      query: (adId) => `${getMeApi}/ads/${adId}`,
       providesTags: (_, __, adId) => [{ type: "myAds", id: adId }],
     }),
     postAd: build.mutation<PostAdResponseSchema, PostAdSchema>({
       query: (body) => ({
-        url: getMeApi + "/ads",
-        method: "Post",
+        url: `${getMeApi}/ads`,
+        method: "POST",
         body: body,
       }),
-      invalidatesTags: ["myAds"],
+      invalidatesTags: [{ type: "myAds", id: "LIST" }],
     }),
     patchAd: build.mutation<PatchAdResSchema, PatchAdSchema & { adId: number }>(
       {
         query: ({ adId, ...body }) => ({
-          url: getMeApi + "/ads" + "/" + adId,
+          url: `${getMeApi}/ads/${adId}`,
           method: "PATCH",
           body: body,
         }),
-        invalidatesTags: (_, __, { adId }) => [{ type: "myAds", id: adId }],
+        invalidatesTags: (_, __, { adId }) => [
+          { type: "myAds", id: adId },
+          { type: "myAds", id: "LIST" },
+        ],
       },
     ),
     deleteAd: build.mutation<string, number>({
       query: (adId) => ({
-        url: getMeApi + "/ads" + "/" + adId,
+        url: `${getMeApi}/ads/${adId}`,
         method: "DELETE",
       }),
-      invalidatesTags: (_, __, adId) => [{ type: "myAds", id: adId }],
+      invalidatesTags: [{ type: "myAds", id: "LIST" }],
     }),
   }),
 });

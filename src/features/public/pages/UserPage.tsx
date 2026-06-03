@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
-import { useGetAdsByUserQuery } from "../publicApi";
-import AdCard from "../../../components/AdCard";
+import { useGetAdsByUserQuery } from "../adsApi";
+import AdsSection from "../../../components/AdsSection";
+import Loading from "../../../components/Loading";
 
 export default function UserPage() {
   const userId = useParams();
@@ -13,7 +14,7 @@ export default function UserPage() {
 
   return (
     <>
-      {isSuccess && (
+      {isSuccess ? (
         <div>
           <div className="flex flex-row bg-surface p-2">
             <img
@@ -28,12 +29,10 @@ export default function UserPage() {
               <div>{data.userdata.phone_number}</div>
             </div>
           </div>
-          <div className="flex flex-wrap">
-            {data.rows.map((ad) => {
-              return <AdCard key={ad.id} ad={ad}></AdCard>;
-            })}
-          </div>
+          <AdsSection ads={data.rows} isProtected={false} />
         </div>
+      ) : (
+        <Loading />
       )}
     </>
   );

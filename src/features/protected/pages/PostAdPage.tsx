@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import type { PostAdSchema } from "../types";
-import { usePostAdMutation } from "../protectedApi";
+import { usePostAdMutation } from "../userApi";
 import LoadCategories from "../../../utils/LoadCategories";
 import LoadCities from "../../../utils/LoadCities";
 

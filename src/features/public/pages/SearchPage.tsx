@@ -1,9 +1,8 @@
 import { useParams } from "react-router";
 import SearchBar from "../../../components/SearchBar";
-import type { Ad } from "../types";
-import { useGetAdBySearchQuery } from "../publicApi";
-import AdCard from "../../../components/AdCard";
+import { useGetAdBySearchQuery } from "../adsApi";
 import Loading from "../../../components/Loading";
+import AdsSection from "../../../components/AdsSection";
 
 export default function SearchPage() {
   const Word = useParams();
@@ -31,11 +30,7 @@ export default function SearchPage() {
             <p className="text-center mt-3 text-2xl">
               {data.rowCount} ilan bulundu
             </p>
-            <div className="flex flex-wrap">
-              {data?.rows.map((ad: Ad) => {
-                return <AdCard key={ad.id} ad={ad} />;
-              })}
-            </div>
+            <AdsSection ads={data.rows} isProtected={false} />
           </>
         ) : (
           <Loading />

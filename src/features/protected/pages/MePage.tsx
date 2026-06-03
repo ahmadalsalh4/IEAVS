@@ -4,9 +4,10 @@ import {
   useDeleteMeMutation,
   useGetMeQuery,
   useGetMyAdsQuery,
-} from "../protectedApi";
+} from "../userApi";
 import { Link, useNavigate } from "react-router";
 import AdCard from "../../../components/AdCard";
+import AdsSection from "../../../components/AdsSection";
 
 export default function MePage() {
   const token = GetToken();
@@ -63,11 +64,8 @@ export default function MePage() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 p-3">
-            {data_MyAds.rows.map((ad) => {
-              return <AdCard key={ad.id} ad={ad} isProtected={true}></AdCard>;
-            })}
-          </div>
+
+          <AdsSection ads={data_MyAds.rows} isProtected={true} />
         </div>
       )}
     </>

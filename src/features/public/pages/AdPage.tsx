@@ -3,9 +3,9 @@ import {
   useGetAdQuery,
   useGetAdsByCatagoryQuery,
   useGetAdsByUserQuery,
-} from "../publicApi";
+} from "../adsApi";
 import { MapPin, Calendar } from "lucide-react";
-import AdCard from "../../../components/AdCard";
+import AdsSection from "../../../components/AdsSection";
 export default function AdPage() {
   const adId = useParams();
   const {
@@ -69,17 +69,7 @@ export default function AdPage() {
             </Link>
             <div>
               <p className="text-3xl m-4">ilgili ilanlar:</p>
-              <div className="flex flex-wrap">
-                {suggestedAds.rows.map((subAd) => {
-                  return ad.id == subAd.id ? null : (
-                    <AdCard
-                      key={subAd.id}
-                      ad={subAd}
-                      isProtected={false}
-                    ></AdCard>
-                  );
-                })}
-              </div>
+              <AdsSection ads={suggestedAds.rows} isProtected={false} />
             </div>
           </div>
         </div>

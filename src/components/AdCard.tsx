@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import type { MyAd } from "../features/protected/types";
-import { useDeleteAdMutation } from "../features/protected/protectedApi";
+import { useDeleteAdMutation } from "../features/protected/userApi";
 
 export default function AdCard({
   ad,
@@ -13,7 +13,7 @@ export default function AdCard({
   return (
     <div className="bg-surface shadow-lg rounded-2xl">
       <Link
-        to={`/ad/${ad.id}`}
+        to={isProtected ? `/me/ads/${ad.id}` : `/ad/${ad.id}`}
         onClick={() => {
           window.scrollTo(0, 0);
         }}

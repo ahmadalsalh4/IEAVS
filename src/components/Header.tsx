@@ -1,27 +1,14 @@
 import { Link, useNavigate } from "react-router";
 import { GetToken, ResetToken } from "../utils/util";
-import { useGetMeQuery } from "../features/protected/protectedApi";
-import { useEffect } from "react";
+import { useGetMeQuery } from "../features/protected/userApi";
 import Loading from "./Loading";
 
 export default function Header() {
   const token = GetToken();
   const navigate = useNavigate();
-  const { data, isSuccess, isError, error, isLoading, refetch } = useGetMeQuery(
-    undefined,
-    {
-      skip: !token,
-    },
-  );
-  useEffect(() => {
-    if (token) {
-      refetch();
-    }
-    if (isError) {
-      ResetToken();
-      window.location.reload();
-    }
-  }, [isError, error, navigate, refetch, token]);
+  const { data, isSuccess, isLoading } = useGetMeQuery(undefined, {
+    skip: !token,
+  });
 
   if (isLoading) {
     return <Loading />;
@@ -39,7 +26,7 @@ export default function Header() {
       >
         IEAVS
       </Link>
-      {isSuccess ? (
+      {isSuccess && token ? (
         <div className="flex items-center">
           <button
             onClick={() => {
