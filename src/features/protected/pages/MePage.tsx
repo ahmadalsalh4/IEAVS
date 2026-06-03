@@ -4,7 +4,7 @@ import {
   useDeleteMeMutation,
   useGetMeQuery,
   useGetMyAdsQuery,
-} from "../userApi";
+} from "../protectedApi";
 import { Link, useNavigate } from "react-router";
 import AdCard from "../../../components/AdCard";
 

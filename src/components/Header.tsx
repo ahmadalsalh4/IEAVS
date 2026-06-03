@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { GetToken, ResetToken } from "../utils/util";
-import { useGetMeQuery } from "../features/protected/userApi";
+import { useGetMeQuery } from "../features/protected/protectedApi";
 import { useEffect } from "react";
 import Loading from "./Loading";
 

@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import type { PatchAdSchema } from "../types";
-import { useGetMyAdQuery, usePatchAdMutation } from "../userApi";
+import { useGetMyAdQuery, usePatchAdMutation } from "../protectedApi";
 import Loading from "../../../components/Loading";
 import MyError from "../../../components/MyError";
 

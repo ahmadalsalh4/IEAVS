@@ -3,7 +3,7 @@ import {
   useGetAdQuery,
   useGetAdsByCatagoryQuery,
   useGetAdsByUserQuery,
-} from "../adsApi";
+} from "../publicApi";
 import { MapPin, Calendar } from "lucide-react";
 import AdCard from "../../../components/AdCard";
 export default function AdPage() {

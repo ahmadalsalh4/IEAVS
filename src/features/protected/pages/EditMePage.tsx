@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useGetMeQuery, usePatchMeMutation } from "../userApi";
+import { useGetMeQuery, usePatchMeMutation } from "../protectedApi";
 import type { PatchUserSchema } from "../types";
 import Loading from "../../../components/Loading";
 import MyError from "../../../components/MyError";

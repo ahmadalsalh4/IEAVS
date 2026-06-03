@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import type { MyAd } from "../features/protected/types";
-import { useDeleteAdMutation } from "../features/protected/userApi";
+import { useDeleteAdMutation } from "../features/protected/protectedApi";
 
 export default function AdCard({
   ad,

@@ -1,4 +1,4 @@
-import { useGetAdsQuery } from "../adsApi";
+import { useGetAdsQuery } from "../publicApi";
 import type { Ad } from "../types";
 import SearchBar from "../../../components/SearchBar";
 import Loading from "../../../components/Loading";

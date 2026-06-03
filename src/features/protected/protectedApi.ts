@@ -46,7 +46,7 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["me"],
     }),
-
+    /*-----------------------------------------------*/
     getMyAds: build.query<MyAdsApiResponseSchema, void>({
       query: () => getMeApi + "/ads",
       providesTags: ["myAds"],
@@ -78,7 +78,7 @@ export const userApi = createApi({
         url: getMeApi + "/ads" + "/" + adId,
         method: "DELETE",
       }),
-      invalidatesTags: ["myAds"],
+      invalidatesTags: (_, __, adId) => [{ type: "myAds", id: adId }],
     }),
   }),
 });

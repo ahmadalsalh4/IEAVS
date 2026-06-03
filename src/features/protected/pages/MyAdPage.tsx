@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { MapPin, Calendar } from "lucide-react";
-import { useGetMyAdQuery } from "../userApi";
+import { useGetMyAdQuery } from "../protectedApi";
 export default function MyAdPage() {
   const adId = useParams();
   const {

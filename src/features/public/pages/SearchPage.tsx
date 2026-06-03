@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import SearchBar from "../../../components/SearchBar";
 import type { Ad } from "../types";
-import { useGetAdBySearchQuery } from "../adsApi";
+import { useGetAdBySearchQuery } from "../publicApi";
 import AdCard from "../../../components/AdCard";
 import Loading from "../../../components/Loading";
 

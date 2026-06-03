@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useGetAdsByUserQuery } from "../adsApi";
+import { useGetAdsByUserQuery } from "../publicApi";
 import AdCard from "../../../components/AdCard";
 
 export default function UserPage() {
