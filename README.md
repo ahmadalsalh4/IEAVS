@@ -1,4 +1,2 @@
-![Screenshot](s1.png)
-![Screenshot](s2.png)
-![Screenshot](s4.png)
-![Screenshot](s4.png)
+<img src="s1.png" width="45%"/> <img src="s2.png" width="45%"/>
+<img src="s3.png" width="45%"/> <img src="s4.png" width="45%"/>
