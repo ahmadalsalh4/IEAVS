@@ -52,7 +52,7 @@ export default function AdCard({
         <>
           <Link
             to={`edit-ad/${ad.id}`}
-            className="bg-blue-400 ml-2 rounded-2xl p-1.5"
+            className="bg-blue-600 ml-2 rounded-2xl p-1.5"
           >
             Edit
           </Link>

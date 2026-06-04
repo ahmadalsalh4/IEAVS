@@ -6,7 +6,6 @@ import {
   useGetMyAdsQuery,
 } from "../userApi";
 import { Link, useNavigate } from "react-router";
-import AdCard from "../../../components/AdCard";
 import AdsSection from "../../../components/AdsSection";
 
 export default function MePage() {
@@ -41,28 +40,33 @@ export default function MePage() {
     <>
       {isSuccess_Me && isSuccess_MyAds && (
         <div>
-          <div className="flex flex-row bg-surface p-2">
-            <img
-              src={data_Me.profile_image_path}
-              alt=""
-              className="w-1/2 h-50 object-cover rounded-4xl"
-            />
-            <div className="flex flex-col m-auto text-2xl ">
-              <div>
-                {data_Me.name} {data_Me.surname}
-              </div>
-              <div className="text-lg">{data_Me.email}</div>
-              <div className="text-lg">{data_Me.phone_number}</div>
-              <div className="flex flex-col gap-3 text-lg">
-                <Link to={"edit"}>edit my account</Link>
-                <button disabled onClick={handleDeleteAcc}>
-                  delete my account
-                </button>
-                <Link to={"post-ad"} className="">
-                  add new Ad{" "}
-                </Link>
+          <div className="flex flex-col">
+            <div className="grid grid-cols-2 bg-surface p-2">
+              <img
+                src={data_Me.profile_image_path}
+                alt=""
+                className="rounded-4xl"
+              />
+              <div className="grid ">
+                <div className="flex flex-col text-lg justify-center items-center">
+                  <div>
+                    {data_Me.name} {data_Me.surname}
+                  </div>
+                  <div className="">{data_Me.email}</div>
+                  <div className="">{data_Me.phone_number}</div>
+                </div>
+
+                <div className="flex flex-col justify-around text-center">
+                  <Link to={"edit"}>edit my account</Link>
+                  <button disabled onClick={handleDeleteAcc}>
+                    delete my account
+                  </button>
+                </div>
               </div>
             </div>
+            <Link to={"post-ad"} className="text-center">
+              add new Ad
+            </Link>
           </div>
 
           <AdsSection ads={data_MyAds.rows} isProtected={true} />

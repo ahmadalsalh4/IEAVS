@@ -4,7 +4,6 @@ import {
   useGetAdsByCatagoryQuery,
   useGetAdsByUserQuery,
 } from "../adsApi";
-import { MapPin, Calendar } from "lucide-react";
 import AdsSection from "../../../components/AdsSection";
 export default function AdPage() {
   const adId = useParams();
@@ -38,12 +37,10 @@ export default function AdPage() {
           <div>
             <img src={ad.image_path} alt="" />
             <div className="p-2 ">
-              <h2 className="text-2xl font-semibold">{ad.title}</h2>
-              <p className="font-semibold text-xl">{ad.price} TL</p>
-              <MapPin size={20} className="inline-block" />
-              <p className="inline-block">{ad.city_name}</p> <br />
-              <Calendar size={20} className="inline-block" />
-              <p className="inline-block"> {ad.date.slice(0, 10)}</p>
+              <h2 className="text-xl">{ad.title}</h2>
+              <p className=" text-lg">{ad.price} TL</p>
+              <p>{ad.city_name}</p>
+              <p> {ad.date.slice(0, 10)}</p>
               <div>
                 aciklama : <span className="text-m">{ad.description}</span>
               </div>
