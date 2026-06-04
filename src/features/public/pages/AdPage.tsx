@@ -60,7 +60,7 @@ export default function AdPage() {
                 alt=""
                 className="h-15 w-15 object-cover rounded-full"
               />
-              <div className="flex flex-col text-xl font-semibold">
+              <div className="flex flex-col text-lg ">
                 <span>
                   {user.userdata.name} {user.userdata.surname}
                 </span>

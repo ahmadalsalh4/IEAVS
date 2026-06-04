@@ -96,7 +96,7 @@ export default function EditMePage() {
               />
               <MyError errorMessage={errorMessage}></MyError>
 
-              <button className="mt-3 bg-amber-50" type="submit">
+              <button className="mt-3" type="submit">
                 Update
               </button>
             </form>

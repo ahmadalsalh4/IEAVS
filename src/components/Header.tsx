@@ -15,8 +15,9 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-between p-1 bg-surface h-full">
+    <div className="flex justify-between p-1 bg-surface h-full ">
       <Link
+        className="self-center"
         to="/"
         onClick={() => {
           if (location.pathname === "/") {
@@ -28,7 +29,7 @@ export default function Header() {
       </Link>
       {isSuccess && token ? (
         <div className="flex items-center">
-          <button
+          <button className="mr-1"
             onClick={() => {
               ResetToken();
               navigate("/");
@@ -37,7 +38,7 @@ export default function Header() {
           >
             logout
           </button>
-          <Link to="/me" className="bg-transparent inline-block">
+          <Link to="/me" className="bg-transparent inline-block ">
             <img
               className="w-8  h-8 object-cover rounded-full "
               src={data.profile_image_path}
@@ -46,11 +47,13 @@ export default function Header() {
           </Link>
         </div>
       ) : (
-        <div>
+        <div className="flex justify-center items-center">
           <Link to="/register" className="mx-2">
             Register
           </Link>
-          <Link to="/login">Login</Link>
+          <Link to="/login" >
+            Login
+          </Link>
         </div>
       )}
     </div>

@@ -18,7 +18,7 @@ export default function SearchBar({ init }: { init: string }) {
       />
       <Link
         to={`/search/${search}`}
-        className={"ml-3 " + (search ? "" : "pointer-events-none")}
+        className={"ml-3  px-6 py-2 " + (search ? "" : "pointer-events-none")}
       >
         ara
       </Link>
