@@ -15,7 +15,7 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-between p-1 bg-surface h-full ">
+    <div className="flex justify-between p-1 bg-surface h-full md:rounded-t-2xl ">
       <Link
         className="self-center"
         to="/"

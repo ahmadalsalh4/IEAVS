@@ -5,9 +5,9 @@ export default function SearchBar({ init }: { init: string }) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="md:text-lg">
       <input
-        className="border-stone-700"
+        className="border-stone-700 "
         type="text"
         value={search}
         placeholder="pense,kalem, yada baska sey!"

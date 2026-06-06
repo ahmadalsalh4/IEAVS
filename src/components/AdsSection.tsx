@@ -9,7 +9,7 @@ export default function AdsSection({
   isProtected: boolean;
 }) {
   return (
-    <div className="grid grid-cols-2 gap-3 p-3">
+    <div className="grid grid-cols-2 gap-3 p-3 md:grid-cols-3 lg:grid-cols-4">
       {ads.map((ad: AdCardType) => {
         return <AdCard key={ad.id} ad={ad} isProtected={isProtected} />;
       })}

@@ -25,7 +25,10 @@
 
 @layer components {
   .myApp {
-    @apply bg-main text-primary font-serif text-sm md:text-base;
+    @apply bg-main text-primary font-serif text-sm;
+    @media (min-width: 768px) {
+      @apply text-base mt-0.5;
+    }
   }
   .myContainer {
     @apply flex justify-center items-center min-h-[calc(100vh-120px)];
@@ -34,6 +37,6 @@
     @apply w-2/3 rounded-3xl p-3 bg-surface shadow-2xl;
   }
   .myHead {
-    @apply text-xl text-center text-deep;
+    @apply text-xl text-center text-deep lg:text-4xl;
   }
 }

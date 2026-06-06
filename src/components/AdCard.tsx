@@ -12,7 +12,7 @@ export default function AdCard({
 }) {
   const [deleteAd] = useDeleteAdMutation();
   return (
-    <div className="bg-surface shadow-lg rounded-2xl">
+    <div className="bg-surface shadow-lg rounded-2xl ">
       <Link
         className="text-black p-0"
         to={isProtected ? `/me/ads/${ad.id}` : `/ad/${ad.id}`}
