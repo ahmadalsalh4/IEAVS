@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useRegisterMutation } from "../authApi";
-import { type RegisterApiSchema } from "../types";
 import { useNavigate, Link } from "react-router";
 import { SetToken } from "../../../utils/util";
+import type { RegisterApiSchema } from "../../../utils/types";
+import MyError from "../../../components/MyError";
 
 export default function RegisterPage() {
   const [register] = useRegisterMutation();
-  const [data, setData] = useState<RegisterApiSchema>({
+  const [form, setForm] = useState<RegisterApiSchema>({
     name: "",
     surname: "",
     phone_number: "",
     email: "",
     password: "",
+    profile_image_path: "",
   });
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   return (
     <div className="myContainer">
@@ -22,12 +25,12 @@ export default function RegisterPage() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            const response = await register(data);
-            if (response.data) {
-              SetToken(response.data.token);
+            const { data, error } = await register(form);
+            if (data) {
+              SetToken(data.token);
               navigate("/");
-            } else if (response.error) {
-              console.log(response.error);
+            } else if (error) {
+              setErrorMessage(error.data.error);
             }
           }}
         >
@@ -36,9 +39,9 @@ export default function RegisterPage() {
             required
             id="name"
             type="text"
-            value={data.name}
+            value={form.name}
             onChange={(e) => {
-              setData({ ...data, name: e.target.value });
+              setForm({ ...form, name: e.target.value });
             }}
           />
 
@@ -47,9 +50,9 @@ export default function RegisterPage() {
             required
             id="surname"
             type="text"
-            value={data.surname}
+            value={form.surname}
             onChange={(e) => {
-              setData({ ...data, surname: e.target.value });
+              setForm({ ...form, surname: e.target.value });
             }}
           />
 
@@ -58,9 +61,9 @@ export default function RegisterPage() {
             required
             id="email"
             type="email"
-            value={data.email}
+            value={form.email}
             onChange={(e) => {
-              setData({ ...data, email: e.target.value });
+              setForm({ ...form, email: e.target.value });
             }}
           />
 
@@ -69,9 +72,9 @@ export default function RegisterPage() {
             required
             id="phone_number"
             type="number"
-            value={data.phone_number}
+            value={form.phone_number}
             onChange={(e) => {
-              setData({ ...data, phone_number: e.target.value });
+              setForm({ ...form, phone_number: e.target.value });
             }}
           />
 
@@ -80,9 +83,9 @@ export default function RegisterPage() {
             required
             id="password"
             type="password"
-            value={data.password}
+            value={form.password}
             onChange={(e) => {
-              setData({ ...data, password: e.target.value });
+              setForm({ ...form, password: e.target.value });
             }}
           />
 
@@ -90,6 +93,7 @@ export default function RegisterPage() {
             have account? <Link to={"/login"}>login now</Link>
           </p>
           <div>
+            <MyError errorMessage={errorMessage}></MyError>
             <button className="mt-3" type="submit">
               Register
             </button>

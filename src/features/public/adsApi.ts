@@ -2,10 +2,10 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseURL, getAdsApi } from "../../utils/apis";
 import type {
-  AdsByUserApiResponseSchema,
-  AdDetailed,
+  Ad,
   AdsApiResponseSchema,
-} from "./types";
+  AdsByUserApiResponseSchema,
+} from "../../utils/types";
 
 export const adsApi = createApi({
   reducerPath: "adsApi",
@@ -17,7 +17,7 @@ export const adsApi = createApi({
     getAdsByCatagory: build.query<AdsApiResponseSchema, string>({
       query: (categoryName) => getAdsApi + `?category=${categoryName}`,
     }),
-    getAd: build.query<AdDetailed, number>({
+    getAd: build.query<Ad, number>({
       query: (adId) => getAdsApi + "/" + adId,
     }),
     getAdsByUser: build.query<AdsByUserApiResponseSchema, number>({

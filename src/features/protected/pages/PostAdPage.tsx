@@ -1,20 +1,23 @@
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import type { PostAdSchema } from "../types";
 import { usePostAdMutation } from "../userApi";
 import LoadCategories from "../../../utils/LoadCategories";
 import LoadCities from "../../../utils/LoadCities";
+import type { PostAdSchema } from "../../../utils/types";
+import MyError from "../../../components/MyError";
 
 export default function PostAdPage() {
   const [PostAd] = usePostAdMutation();
-  const [data, setData] = useState<PostAdSchema>({
+  const [form, setForm] = useState<PostAdSchema>({
     title: "",
     description: "",
     price: "",
+    image_path: "",
     category_id: "",
     city_id: "",
   });
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   return (
     <div className="myContainer">
@@ -23,11 +26,11 @@ export default function PostAdPage() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            const response = await PostAd(data);
-            if (response.data) {
+            const { data, error } = await PostAd(form);
+            if (data) {
               navigate("/me");
-            } else if (response.error) {
-              console.log(response.error);
+            } else if (error) {
+              setErrorMessage(error.data.error);
             }
           }}
         >
@@ -35,49 +38,49 @@ export default function PostAdPage() {
           <input
             type="text"
             id="title"
-            value={data.title}
+            value={form.title}
             onChange={(e) => {
-              setData({ ...data, title: e.target.value });
+              setForm({ ...form, title: e.target.value });
             }}
           />
           <label htmlFor="price">price: </label>
           <input
             type="text"
             id="price"
-            value={data.price}
+            value={form.price}
             onChange={(e) => {
-              setData({ ...data, price: e.target.value });
+              setForm({ ...form, price: e.target.value });
             }}
           />
           <label htmlFor="description">description: </label>
           <input
             type="text"
             id="description"
-            value={data.description}
+            value={form.description}
             onChange={(e) => {
-              setData({ ...data, description: e.target.value });
+              setForm({ ...form, description: e.target.value });
             }}
           />
 
           <select
             id="category_id"
-            value={data.category_id}
+            value={form.category_id}
             onChange={(e) => {
-              setData({ ...data, category_id: e.target.value });
+              setForm({ ...form, category_id: e.target.value });
             }}
           >
             <LoadCategories />
           </select>
           <select
             id="city_id"
-            value={data.city_id}
+            value={form.city_id}
             onChange={(e) => {
-              setData({ ...data, city_id: e.target.value });
+              setForm({ ...form, city_id: e.target.value });
             }}
           >
             <LoadCities />
           </select>
-
+          <MyError errorMessage={errorMessage}></MyError>
           <button type="submit" className="mt-3">
             post ad
           </button>

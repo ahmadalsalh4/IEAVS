@@ -7,7 +7,7 @@ export default function SearchBar({ init }: { init: string }) {
   return (
     <div>
       <input
-      className="border-stone-700"
+        className="border-stone-700"
         type="text"
         value={search}
         placeholder="pense,kalem, yada baska sey!"

@@ -1,16 +1,19 @@
 import { useNavigate, Link } from "react-router";
-import { type LoginApiSchema } from "../types";
+
 import { useState } from "react";
 import { useLogInMutation } from "../authApi";
 import { SetToken } from "../../../utils/util";
+import type { LoginApiSchema } from "../../../utils/types";
+import MyError from "../../../components/MyError";
 
 export default function LoginPage() {
   const [Login] = useLogInMutation();
-  const [data, setData] = useState<LoginApiSchema>({
+  const [form, setForm] = useState<LoginApiSchema>({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   return (
     <div className="myContainer">
@@ -19,12 +22,12 @@ export default function LoginPage() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            const response = await Login(data);
-            if (response.data) {
-              SetToken(response.data.token);
+            const { data, error } = await Login(form);
+            if (data) {
+              SetToken(data.token);
               navigate("/");
-            } else if (response.error) {
-              console.log(response.error);
+            } else if (error) {
+              setErrorMessage(error.data.error);
             }
           }}
         >
@@ -32,23 +35,24 @@ export default function LoginPage() {
           <input
             type="email"
             id="Email"
-            value={data.email}
+            value={form.email}
             onChange={(e) => {
-              setData({ ...data, email: e.target.value });
+              setForm({ ...form, email: e.target.value });
             }}
           />{" "}
           <label htmlFor="Password">Password: </label>
           <input
             type="password"
             id="Password"
-            value={data.password}
+            value={form.password}
             onChange={(e) => {
-              setData({ ...data, password: e.target.value });
+              setForm({ ...form, password: e.target.value });
             }}
           />
           <p className="mt-3">
             dont have account? <Link to={"/register"}>register now</Link>
           </p>
+          <MyError errorMessage={errorMessage}></MyError>
           <button type="submit" className="mt-3">
             Login
           </button>

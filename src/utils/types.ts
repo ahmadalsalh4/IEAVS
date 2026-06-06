@@ -22,7 +22,7 @@ export type Ad = {
   user_id: number;
 };
 
-export type AdCard = Pick<
+export type AdCardType = Pick<
   Ad,
   "id" | "title" | "price" | "image_path" | "city_name" | "state_name"
 >;
@@ -36,6 +36,8 @@ export type LoginResponseSchema = {
   token: string;
 };
 
+export type RegisterApiSchema = Omit<User, "id"> & { password: string };
+
 export type RegisterResponseSchema = {
   token: string;
   data: User;
@@ -43,16 +45,16 @@ export type RegisterResponseSchema = {
 
 export type AdsApiResponseSchema = {
   rowCount: number;
-  rows: [AdCard];
+  rows: [AdCardType];
 };
 
 export type AdsByUserApiResponseSchema = {
   userdata: PublicUser;
   rowCount: number;
-  rows: [AdCard];
+  rows: [AdCardType];
 };
 
-export type PatchUserSchema = Partial<PublicUser>;
+export type PatchUserSchema = Partial<Omit<RegisterApiSchema, "email">>;
 
 export type PostAdSchema = Pick<
   Ad,

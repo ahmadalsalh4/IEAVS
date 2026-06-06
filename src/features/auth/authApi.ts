@@ -6,7 +6,7 @@ import type {
   RegisterApiSchema,
   LoginResponseSchema,
   RegisterResponseSchema,
-} from "./types";
+} from "../../utils/types";
 
 export const authApi = createApi({
   reducerPath: "authApi",

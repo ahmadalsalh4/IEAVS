@@ -29,7 +29,8 @@ export default function Header() {
       </Link>
       {isSuccess && token ? (
         <div className="flex items-center">
-          <button className="mr-1"
+          <button
+            className="mr-1"
             onClick={() => {
               ResetToken();
               navigate("/");
@@ -51,9 +52,7 @@ export default function Header() {
           <Link to="/register" className="mx-2">
             Register
           </Link>
-          <Link to="/login" >
-            Login
-          </Link>
+          <Link to="/login">Login</Link>
         </div>
       )}
     </div>

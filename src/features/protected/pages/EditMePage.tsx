@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useGetMeQuery, usePatchMeMutation } from "../userApi";
-import type { PatchUserSchema } from "../types";
 import Loading from "../../../components/Loading";
 import MyError from "../../../components/MyError";
+import type { PatchUserSchema } from "../../../utils/types";
 
 export default function EditMePage() {
   const navigate = useNavigate();

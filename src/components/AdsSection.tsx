@@ -1,16 +1,16 @@
-import type { Ad } from "../features/public/types";
+import type { AdCardType } from "../utils/types";
 import AdCard from "./AdCard";
 
 export default function AdsSection({
   ads,
   isProtected,
 }: {
-  ads: Ad[];
+  ads: AdCardType[];
   isProtected: boolean;
 }) {
   return (
     <div className="grid grid-cols-2 gap-3 p-3">
-      {ads.map((ad: Ad) => {
+      {ads.map((ad: AdCardType) => {
         return <AdCard key={ad.id} ad={ad} isProtected={isProtected} />;
       })}
     </div>

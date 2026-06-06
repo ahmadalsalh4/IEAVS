@@ -1,18 +1,16 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseURL, getMeApi } from "../../utils/apis";
-import {
-  type MyAdsApiResponseSchema,
-  type PatchAdResSchema,
-  type PatchAdSchema,
-  type PatchUserResSchema,
-  type PatchUserSchema,
-  type PostAdResponseSchema,
-  type PostAdSchema,
-  type User,
-} from "./types";
+
 import { GetToken } from "../../utils/util";
-import type { AdDetailed } from "../public/types";
+import type {
+  User,
+  PatchAdSchema,
+  PatchUserSchema,
+  PostAdSchema,
+  Ad,
+  AdsApiResponseSchema,
+} from "../../utils/types";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -37,7 +35,7 @@ export const userApi = createApi({
         method: "DELETE",
       }),
     }),
-    patchMe: build.mutation<PatchUserResSchema, PatchUserSchema>({
+    patchMe: build.mutation<User, PatchUserSchema>({
       query: (body) => ({
         url: getMeApi,
         method: "PATCH",
@@ -46,15 +44,15 @@ export const userApi = createApi({
       invalidatesTags: ["me"],
     }),
     /*-----------------------------------------------*/
-    getMyAds: build.query<MyAdsApiResponseSchema, void>({
+    getMyAds: build.query<AdsApiResponseSchema, void>({
       query: () => `${getMeApi}/ads`,
       providesTags: [{ type: "myAds", id: "LIST" }],
     }),
-    getMyAd: build.query<AdDetailed, number>({
+    getMyAd: build.query<Ad, number>({
       query: (adId) => `${getMeApi}/ads/${adId}`,
       providesTags: (_, __, adId) => [{ type: "myAds", id: adId }],
     }),
-    postAd: build.mutation<PostAdResponseSchema, PostAdSchema>({
+    postAd: build.mutation<Ad, PostAdSchema>({
       query: (body) => ({
         url: `${getMeApi}/ads`,
         method: "POST",
@@ -62,19 +60,17 @@ export const userApi = createApi({
       }),
       invalidatesTags: [{ type: "myAds", id: "LIST" }],
     }),
-    patchAd: build.mutation<PatchAdResSchema, PatchAdSchema & { adId: number }>(
-      {
-        query: ({ adId, ...body }) => ({
-          url: `${getMeApi}/ads/${adId}`,
-          method: "PATCH",
-          body: body,
-        }),
-        invalidatesTags: (_, __, { adId }) => [
-          { type: "myAds", id: adId },
-          { type: "myAds", id: "LIST" },
-        ],
-      },
-    ),
+    patchAd: build.mutation<Ad, PatchAdSchema & { adId: number }>({
+      query: ({ adId, ...body }) => ({
+        url: `${getMeApi}/ads/${adId}`,
+        method: "PATCH",
+        body: body,
+      }),
+      invalidatesTags: (_, __, { adId }) => [
+        { type: "myAds", id: adId },
+        { type: "myAds", id: "LIST" },
+      ],
+    }),
     deleteAd: build.mutation<string, number>({
       query: (adId) => ({
         url: `${getMeApi}/ads/${adId}`,
