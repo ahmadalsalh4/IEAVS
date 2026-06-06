@@ -41,12 +41,14 @@ export default function MePage() {
       {isSuccess_Me && isSuccess_MyAds && (
         <div>
           <div className="flex flex-col">
-            <div className="grid grid-cols-2 bg-surface p-2">
-              <img
-                src={data_Me.profile_image_path}
-                alt=""
-                className="rounded-4xl"
-              />
+            <div className="grid grid-cols-2 bg-surface p-2 ">
+              <div className="">
+                <img
+                  src={data_Me.profile_image_path}
+                  alt=""
+                  className="h-50 object-cover rounded-4xl md:w-2/5 md:mx-auto "
+                />
+              </div>
               <div className="grid ">
                 <div className="flex flex-col text-lg justify-center items-center">
                   <div>
@@ -58,7 +60,7 @@ export default function MePage() {
 
                 <div className="flex flex-col justify-around text-center">
                   <Link to={"edit"}>edit my account</Link>
-                  <button disabled onClick={handleDeleteAcc}>
+                  <button disabled onClick={handleDeleteAcc} className="bg-red-700">
                     delete my account
                   </button>
                 </div>

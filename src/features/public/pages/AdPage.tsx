@@ -35,35 +35,45 @@ export default function AdPage() {
       {ad_suc && user_suc && suggestedAds_suc && (
         <div>
           <div>
-            <img src={ad.image_path} alt="" />
-            <div className="p-2 ">
-              <h2 className="text-xl">{ad.title}</h2>
-              <p className=" text-lg">{ad.price} TL</p>
-              <p>{ad.city_name}</p>
-              <p> {ad.date.slice(0, 10)}</p>
-              <div>
-                aciklama : <span className="text-m">{ad.description}</span>
+            <div className="md:flex">
+              <img
+                src={ad.image_path}
+                alt=""
+                className="md:h-120 md:w-1/2 md:object-contain md:m-1 "
+              />
+              <div className="p-2 md:flex md:flex-col w-full ">
+                <div>
+                  <h2 className="text-xl">{ad.title}</h2>
+                  <p className=" text-lg">{ad.price} TL</p>
+                  <p>{ad.city_name}</p>
+                  <p> {ad.date.slice(0, 10)}</p>
+                  <div>
+                    aciklama : <span className="text-m">{ad.description}</span>
+                  </div>
+                </div>
+
+                <Link
+                  to={`/user/${ad.user_id}`}
+                  className="bg-surface h-15 flex items-center gap-3 p-3 rounded-2xl text-inherit hover:opacity-95 "
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  <img
+                    src={user?.userdata.profile_image_path}
+                    alt=""
+                    className="h-15 w-15 object-cover rounded-full"
+                  />
+                  <div className="flex flex-col text-lg ">
+                    <span>
+                      {user.userdata.name} {user.userdata.surname}
+                    </span>
+                    <span>{user.userdata.phone_number}</span>
+                  </div>
+                </Link>
               </div>
             </div>
-            <Link
-              to={`/user/${ad.user_id}`}
-              className="bg-surface h-15 flex items-center gap-3 p-3 rounded-2xl text-inherit hover:opacity-95"
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-            >
-              <img
-                src={user?.userdata.profile_image_path}
-                alt=""
-                className="h-15 w-15 object-cover rounded-full"
-              />
-              <div className="flex flex-col text-lg ">
-                <span>
-                  {user.userdata.name} {user.userdata.surname}
-                </span>
-                <span>{user.userdata.phone_number}</span>
-              </div>
-            </Link>
+
             <div>
               <p className="text-3xl m-4">ilgili ilanlar:</p>
               <AdsSection ads={suggestedAds.rows} isProtected={false} />

@@ -27,7 +27,7 @@
   .myApp {
     @apply bg-main text-primary font-serif text-sm;
     @media (min-width: 768px) {
-      @apply text-base mt-0.5;
+      @apply text-base mt-0.5 w-4/6 mx-auto;
     }
   }
   .myContainer {

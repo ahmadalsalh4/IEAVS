@@ -16,8 +16,12 @@ export default function MyAdPage() {
     <>
       {ad_suc && (
         <div>
-          <div>
-            <img src={ad.image_path} alt="" />
+          <div className="md:flex">
+            <img
+              src={ad.image_path}
+              alt=""
+              className="md:h-120 md:w-1/2 md:object-contain md:m-1"
+            />
             <div className="p-2 ">
               <h2 className="text-xl">{ad.title}</h2>
               <p className=" text-lg">{ad.price} TL</p>

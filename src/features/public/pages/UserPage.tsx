@@ -20,7 +20,7 @@ export default function UserPage() {
             <img
               src={data.userdata.profile_image_path}
               alt=""
-              className="w-1/2 h-50 object-cover rounded-4xl"
+              className="w-1/2 h-50 object-cover rounded-4xl md:w-1/4"
             />
             <div className="flex flex-col m-auto text-2xl">
               <div>
