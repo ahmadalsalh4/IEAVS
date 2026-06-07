@@ -60,7 +60,11 @@ export default function MePage() {
 
                 <div className="flex flex-col justify-around text-center">
                   <Link to={"edit"}>edit my account</Link>
-                  <button disabled onClick={handleDeleteAcc} className="bg-red-700">
+                  <button
+                    disabled
+                    onClick={handleDeleteAcc}
+                    className="bg-red-700"
+                  >
                     delete my account
                   </button>
                 </div>

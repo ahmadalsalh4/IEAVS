@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { usePostAdMutation } from "../userApi";
 import LoadCategories from "../../../utils/LoadCategories";
 import LoadCities from "../../../utils/LoadCities";
 import type { PostAdSchema } from "../../../utils/types";
 import MyError from "../../../components/MyError";
+import { imgToBase64 } from "../../../utils/util";
 
 export default function PostAdPage() {
   const [PostAd] = usePostAdMutation();
@@ -16,6 +17,12 @@ export default function PostAdPage() {
     category_id: "",
     city_id: "",
   });
+  async function handleImgSelect(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files) {
+      const base64Img = await imgToBase64(e.target.files[0]);
+      setForm({ ...form, image_path: base64Img });
+    }
+  }
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -61,7 +68,6 @@ export default function PostAdPage() {
               setForm({ ...form, description: e.target.value });
             }}
           />
-
           <select
             id="category_id"
             value={form.category_id}
@@ -80,6 +86,11 @@ export default function PostAdPage() {
           >
             <LoadCities />
           </select>
+          <label htmlFor="image_path">ad image: </label>
+          <input id="image_path" type="file" onChange={handleImgSelect} />
+          {form.image_path && (
+            <img src={form.image_path} className="p-1 w-2/5" />
+          )}
           <MyError errorMessage={errorMessage}></MyError>
           <button type="submit" className="mt-3">
             post ad

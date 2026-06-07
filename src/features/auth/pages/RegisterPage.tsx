@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useRegisterMutation } from "../authApi";
 import { useNavigate, Link } from "react-router";
-import { SetToken } from "../../../utils/util";
+import { imgToBase64, SetToken } from "../../../utils/util";
 import type { RegisterApiSchema } from "../../../utils/types";
 import MyError from "../../../components/MyError";
 
@@ -15,6 +15,13 @@ export default function RegisterPage() {
     password: "",
     profile_image_path: "",
   });
+
+  async function handleImgSelect(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files) {
+      const base64Img = await imgToBase64(e.target.files[0]);
+      setForm({ ...form, profile_image_path: base64Img });
+    }
+  }
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -88,6 +95,18 @@ export default function RegisterPage() {
               setForm({ ...form, password: e.target.value });
             }}
           />
+          <label htmlFor="profile_image_path">profile image: </label>
+          <input
+            id="profile_image_path"
+            type="file"
+            onChange={handleImgSelect}
+          />
+          {form.profile_image_path && (
+            <img
+              src={form.profile_image_path}
+              className="p-1 rounded-full w-40 h-40 object-cover"
+            />
+          )}
 
           <p className="mt-3">
             have account? <Link to={"/login"}>login now</Link>
