@@ -2,9 +2,6 @@
 
 A classified-ads web application (Turkey-wide: all 81 cities) built with React and TypeScript. Users register, post and manage their own ads with images, and everyone can search listings by keyword, city, and category.
 
-<img src="s1.png" width="45%"/> <img src="s2.png" width="45%"/>
-<img src="s3.png" width="45%"/> <img src="s4.png" width="45%"/>
-
 ## Features
 
 **Public**
@@ -53,3 +50,6 @@ npm run lint       # ESLint
 ```
 
 The app expects the REST API at `http://localhost:5000/api/` (see `src/utils/apis.ts`).
+
+<img src="s1.png" width="45%"/> <img src="s2.png" width="45%"/>
+<img src="s3.png" width="45%"/> <img src="s4.png" width="45%"/>
